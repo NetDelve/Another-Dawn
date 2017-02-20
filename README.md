@@ -1,7 +1,10 @@
 # Another-Dawn
+	by NetDelve
+	Version 0.0.1
+
 This is  Minecraft Clone #8953
 so no copyright plz
-we are using cpp with ogre3d
+we are using cpp with ogre3d and react physics 
 
 To-Do list
 
@@ -49,3 +52,4 @@ Misc
 		apples
 
 Storyline
+	something
