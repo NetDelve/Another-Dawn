@@ -3,8 +3,9 @@
 using namespace std;
 
 int main(int argc, char *argv[])
-{
-    //system("PAUSE"); for windows
-    cin.ignore().get();/*linux bash*/
+{	
+    system("clear");
+    cout << "Hello World";
+    cin.ignore().get();
     return EXIT_SUCCESS;
 }
