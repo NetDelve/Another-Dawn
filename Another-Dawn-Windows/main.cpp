@@ -1,19 +1,28 @@
 #include <iostream>
 #include <stdlib.h>
-#include <stdio.h>
 
 using namespace std;
 
+void credits(void);
+
 int main()
 {
-    cout <<"Thanks for playing"<<endl
-    <<"We are sorry that this is all we have currently we try to update regularly "<<endl
+   credits();
+    return 0;
+}
+
+void credits(){
+ cout <<"Thanks for playing"<<endl
+    <<"We are sorry that this is all we have currently we try to update regularly  "<<endl
     <<"So make sure to check back soon"<<endl
-    << "Credits" << endl
+    <<"Credits" << endl
     <<"NetDelve"<<endl
     <<"JustaDebianDistro && Nutcase84"<<endl
     <<"Other Contributers"<<endl
-    <<" "<<endl;
+    <<" "<<endl //add yourself here
+    <<" "<<endl //add yourself here
+    <<"|                 |"<<endl
+    <<"v Contribute Here v"<<endl
+    <<"https://github.com/nutcase84/Another-Dawn "<<endl;
     system("Pause");
-    return 0;
 }
