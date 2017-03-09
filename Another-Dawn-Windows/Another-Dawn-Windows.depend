@@ -1,6 +1,5 @@
 # depslib dependency file v1.0
-1488062953 source:c:\users\tyrone\documents\github\another-dawn\another-dawn-windows\main.cpp
+1488482162 source:c:\users\tyrone\documents\github\another-dawn\another-dawn-windows\main.cpp
 	<iostream>
 	<stdlib.h>
-	<stdio.h>
 
