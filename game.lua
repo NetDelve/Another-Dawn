@@ -1,5 +1,6 @@
 --load save here if required
 
+require "player"
 function love.update()
 
 end
