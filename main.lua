@@ -1,6 +1,10 @@
 require "game-art/artinclude"
 
-function love.draw()
-  love.graphics.setBackgroundColor(100, 100, 100)
-	love.graphics.print("name: " ,10, 30 )
+function menu()
+	require 'menu'
+end
+
+
+function love.load()
+	menu()
 end
