@@ -2,18 +2,18 @@
 
 require "player"
 
-map = {} --objects to be rendered are put here
+map = {} --objects to be rendered are put here, recalculated every time a new area is loaded
 mapAreas = {} --list of areas that will be put into the rendering queue
 
 function love.update(dt)
 	if love.keyboard.isDown("w") then --would probably be a good idea to add a "inputconf.lua" file at some point
-		player.x = player.x - dt*player.moveSpeed
-	elseif love.keyboard.isDown("s") then
-		player.x = player.x + dt*player.moveSpeed
-	elseif love.keyboard.isDown("a") then
 		player.y = player.y - dt*player.moveSpeed
-	elseif love.keyboard.isDown("d") then
+	elseif love.keyboard.isDown("s") then
 		player.y = player.y + dt*player.moveSpeed
+	elseif love.keyboard.isDown("a") then
+		player.x = player.x - dt*player.moveSpeed
+	elseif love.keyboard.isDown("d") then
+		player.x = player.x + dt*player.moveSpeed
 	end
 end
 
