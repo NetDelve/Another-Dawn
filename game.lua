@@ -1,9 +1,7 @@
 --load save here if required
 
 require "player"
-
-map = {} --objects to be rendered are put here, recalculated every time a new area is loaded
-mapAreas = {} --list of areas that will be put into the rendering queue
+require "mapHandler"
 
 function love.update(dt)
 	if love.keyboard.isDown("w") then --would probably be a good idea to add a "inputconf.lua" file at some point
