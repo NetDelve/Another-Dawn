@@ -16,7 +16,7 @@ function love.update(dt)
 end
 
 function love.draw()
-	love.graphics.setBackgroundColor(100, 60, 100)
+	love.graphics.setBackgroundColor(0, 180, 200)
 	for i,v in ipairs(map) do
 		love.graphics.draw(v.sprite, v.x, v.y)
 	end
