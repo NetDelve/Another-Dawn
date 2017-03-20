@@ -14,7 +14,7 @@ Character
 	
 Gameplay
 	>Stuff<
-
+  
 Art
 	Character
 		Default
