@@ -1,4 +1,4 @@
-require "game-art/artinclude"
+require "game-art/menu"
 
 function menu()
 	require 'menu'
