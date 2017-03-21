@@ -12,7 +12,7 @@ function mapHandler.loadArea(id) --loads area, but if called manually will get o
 		if v.id == id then
 			local insertTable = require(v.mapFile)
 			for i,v in ipairs(insertTable) do
-				table.insert(v, mapHandler.map)
+				table.insert(mapHandler.map, v)
 			end
 			return true
 		end
