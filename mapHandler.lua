@@ -8,14 +8,13 @@ function mapHandler.loadAllSprites() --loads all images for all map areas, hopef
 end
 
 function mapHandler.loadArea(id) --loads area, but if called manually will get overwriten by recalculateAreas() if area isn't on screen
-	for i,v in ipairs(globalIndex) do
+	for i,v in ipairs(mapHandler.globalIndex) do
 		if v.id == id then
 			local insertTable = require(v.mapFile)
 			for i,v in ipairs(insertTable) do
 				table.insert(v, mapHandler.map)
 			end
 			return true
-			break
 		end
 	end
 	return false
@@ -33,12 +32,10 @@ function mapHandler.recalculateCheck(x, y, sX, sY) --checks to see if there is a
 		for o,b in ipairs(mapHandler.loadedAreas) do
 			if i == o then
 				isInArray = true
-				break
 			end
 		end
 		if not isInArray then
 			return true
-			break
 		end
 	end
 	return false
@@ -53,7 +50,7 @@ function mapHandler.recalculateAreas(x, y, sX, sY) --manages loaded areas based 
 		end
 	end
 	for i,v in ipairs(mapHandler.loadedAreas) do
-		mapHandler.loadArea(mapHandler[v].id)
+		mapHandler.loadArea(mapHandler.globalIndex[v].id)
 	end
 end
 
