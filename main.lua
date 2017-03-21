@@ -1,4 +1,4 @@
-require "game-art/menu"
+require "game-art/menu/menu"
 require "input"
 suit = require "libs/suit"
 
