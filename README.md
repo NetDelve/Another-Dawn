@@ -1,6 +1,6 @@
 # Another-Dawn
 	by NetDelve
-	Version 0.0.1
+	Version 0.0.2
   
 OpenWorld Space Adventure
 Lua 2D topdown 16bit graphics 

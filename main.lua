@@ -1,16 +1,8 @@
-require "game-art/menu"
 require "input"
-
-function menu()
-	require 'menu'
-end
-
-function playgame()
-require 'game'
-end
+suit = require "libs/suit"
 
 function love.load()
-	menu()
+	require "menu"
 end
 
 function love.keypressed(key)
