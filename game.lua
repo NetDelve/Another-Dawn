@@ -20,5 +20,5 @@ function love.draw()
 	for i,v in ipairs(map) do
 		love.graphics.draw(v.sprite, v.x, v.y)
 	end
-	love.graphics.rectangle("fill", player.x, player.y, 50, 50) --temporary "playermodel"
+	love.graphics.rectangle("fill", player.x, player.y, 50, 50, 15, 15) --temporary "playermodel"
 end

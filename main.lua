@@ -1,5 +1,6 @@
 require "game-art/menu"
 require "input"
+suit = require "libs/suit"
 
 function menu()
 	require 'menu'

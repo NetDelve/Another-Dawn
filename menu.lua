@@ -1,11 +1,12 @@
+
 function love.draw()
   love.graphics.setBackgroundColor(100, 100, 100)
 	love.graphics.print("Another Dawn v0.0.2" , 10, 30 )
-  love.graphics.print("Hit 'o' to play" , 10, 60 )
+  suit.draw()
 end
 
 function love.update(dt)
-	if love.keyboard.isDown("o") then 
-		playgame()
-	end
+	if suit.Button("Play Game", 50,100, 150,30).hit then
+        playgame()
+    	end
 end
