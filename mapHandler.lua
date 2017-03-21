@@ -14,6 +14,18 @@ function mapHandler.recalculateCheck(x, y, sX, sY) --checks to see if there is a
 			table.insert(drawableAreas, v)
 		end
 	end
+	for i,v in ipairs(drawableAreas) do
+		isInArray = false
+		for o,b in ipairs(globalIndex) do
+			if i == o then
+				isInArray = true
+				break
+			end
+		end
+		if not isInArray then
+			
+		end
+	end
 end
 
 function mapHandler.recalculateAreas(x, y, sX, sY) --manages loaded areas based on player/camera position
