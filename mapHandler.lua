@@ -10,7 +10,7 @@ end
 function mapHandler.loadArea(id) --loads area, but if called manually will get overwriten by recalculateAreas() if area isn't on screen
 	for i,v in ipairs(mapHandler.globalIndex) do
 		if v.id == id then
-			local insertTable = require(v.mapFile)
+			local insertTable = require(v.areaFile)
 			for i,v in ipairs(insertTable) do
 				table.insert(mapHandler.map, v)
 			end
