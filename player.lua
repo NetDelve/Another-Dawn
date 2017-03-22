@@ -6,4 +6,7 @@ player.moveSpeed = 500
 
 player.sprite = nil --player sprite
 
+player.sX = 50 --player size
+player.sY = 50
+
 return player
