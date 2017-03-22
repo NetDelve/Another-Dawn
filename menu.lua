@@ -1,4 +1,4 @@
-require "game-art/menu/artinclude"
+require "game-art/loadArt"
 function love.draw()
 	love.graphics.setBackgroundColor(100, 100, 100)
 	love.graphics.print("Another Dawn v0.0.2" , 10, 30 )

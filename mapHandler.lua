@@ -1,9 +1,12 @@
 mapHandler = {}
-mapHandler.map = {} --objects to be rendered are put here, recalculated every time a new area is loaded
-mapHandler.globalIndex = require "map/globalIndex" --load array of all avalible areas
-mapHandler.loadedAreas = {}
 
-function mapHandler.loadAllSprites() --loads all images for all map areas, hopefully temporary until dynamic image loading is implimented
+function mapHandler.loadWorld(indexFile) --loads new world
+	mapHandler.map = {} --objects to be rendered are put here, recalculated every time a new area is loaded
+	mapHandler.globalIndex = require(indexFile) --load array of all avalible areas
+	mapHandler.loadedAreas = {}
+end
+
+function mapHandler.loadAllSprites() --loads all images for currently loaded world, removing any world images currently loaded
 	
 end
 

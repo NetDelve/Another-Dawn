@@ -1,7 +1,7 @@
---load save here if required
-
 require "player"
 require "mapHandler"
+
+mapHandler.loadWorld("map/testWorld/globalIndex")
 
 cam = {x = 0, y = 0}
 
