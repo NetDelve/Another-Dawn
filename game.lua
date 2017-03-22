@@ -26,9 +26,12 @@ end
 
 function love.draw()
 	for i,v in ipairs(mapHandler.map) do
-		love.graphics.setColor(0,0,0)
-		love.graphics.rectangle("fill", v.x-cam.x, v.y-cam.y, v.sX, v.sY)
-		--love.graphics.draw(v.sprite, v.x, v.y)
+		if not v.sprite then
+			love.graphics.setColor(0,0,0)
+			love.graphics.rectangle("fill", v.x-cam.x, v.y-cam.y, v.sX, v.sY)
+		else
+			love.graphics.draw(v.sprite, v.x-cam.x, v.y-cam.y)
+		end
 	end
 	love.graphics.setColor(255,255,255)
 	love.graphics.rectangle("fill", (love.graphics.getWidth()/2)-player.sX, (love.graphics.getHeight()/2)-player.sY, 50, 50, 15, 15) --temporary "playermodel"
