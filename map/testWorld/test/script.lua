@@ -1,11 +1,11 @@
 return function (v)
-	if not __xx then
-		__xx = 0
+	if not v.__xx then
+		v.__xx = 0
 	end
-	__xx = __xx + 1
-	if __xx >= 50 then
-		__xx = 0
+	v.__xx = v.__xx + 1
+	if v.__xx >= 50 then
+		v.__xx = 0
 	end
-	v.x = __xx
+	v.x = v.__xx
 	return v
 end
