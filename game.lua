@@ -23,6 +23,7 @@ function love.update(dt)
 	if mapHandler.recalculateCheck(cam.x, cam.y, love.graphics.getWidth()-cam.x, love.graphics.getHeight()-cam.y) then
 		mapHandler.recalculateAreas(cam.x, cam.y, love.graphics.getWidth()-cam.x, love.graphics.getHeight()-cam.y)
 	end
+	mapHandler.runObjectScripts()
 end
 
 function love.draw()

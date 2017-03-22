@@ -12,6 +12,9 @@ function mapHandler.loadArea(id) --loads area, but if called manually will get o
 		if v.id == id then
 			local insertTable = require(v.areaFile)
 			for i,v in ipairs(insertTable) do
+				if v.scriptFile ~= nil then
+					v.script = require(v.scriptFile)
+				end
 				table.insert(mapHandler.map, v)
 			end
 			return true
@@ -51,6 +54,14 @@ function mapHandler.recalculateAreas(x, y, sX, sY) --manages loaded areas based 
 	end
 	for i,v in ipairs(mapHandler.loadedAreas) do
 		mapHandler.loadArea(mapHandler.globalIndex[v].id)
+	end
+end
+
+function mapHandler.runObjectScripts() --run all loaded object scripts
+	for i,v in ipairs(mapHandler.map) do
+		if v.script ~= nil then
+			v = v.script(v)
+		end
 	end
 end
 
