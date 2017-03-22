@@ -2,6 +2,7 @@ require "player"
 require "mapHandler"
 
 mapHandler.loadWorld("map/testWorld/globalIndex")
+require "map/testWorld/globalScript"
 
 cam = {x = 0, y = 0}
 
