@@ -1,7 +1,7 @@
 require "player"
 require "mapHandler"
 
-mapHandler.loadWorld("map/testWorld/globalIndex")
+mapHandler.loadWorld("map/testWorld/globalIndex", "map/testWorld/globalImages")
 require "map/testWorld/globalScript"
 
 cam = {x = 0, y = 0}

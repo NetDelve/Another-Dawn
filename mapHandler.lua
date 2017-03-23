@@ -1,7 +1,8 @@
 mapHandler = {}
 
-function mapHandler.loadWorld(indexFile) --loads new world
+function mapHandler.loadWorld(indexFile, imageFile) --loads new world
 	mapHandler.map = {} --objects to be rendered are put here, recalculated every time a new area is loaded
+	mapHandler.mapImages = require(imageFile)
 	mapHandler.globalIndex = require(indexFile) --load array of all avalible areas
 	mapHandler.loadedAreas = {}
 	--mapHandler.loadAllImages() functionality to be collapsed into here

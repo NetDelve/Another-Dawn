@@ -4,6 +4,6 @@ table.insert(mapIndex, require "/map/testWorld/test/index")
 
 --Images for world
 local mapImages = {}
---mapImages.imagename = love.graphics.newImage("imagefile")
+mapImages.stone = love.graphics.newImage("/map/testWorld/images/ground_rock.png")
 
 return mapIndex, mapImages
