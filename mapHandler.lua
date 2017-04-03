@@ -2,11 +2,9 @@ mapHandler = {}
 
 function mapHandler.loadWorld(indexFile, imageFile) --loads new world
 	mapHandler.map = {} --objects to be rendered are put here, recalculated every time a new area is loaded
-	mapHandler.renderList = {} --objects with transformations added
 	mapHandler.mapImages = require(imageFile)
 	mapHandler.globalIndex = require(indexFile) --load array of all avalible areas
 	mapHandler.loadedAreas = {}
-	--mapHandler.loadAllImages() functionality to be collapsed into here
 end
 
 function mapHandler.loadArea(id) --loads area, but if called manually will get overwriten by recalculateAreas() if area isn't on screen
@@ -67,7 +65,7 @@ function mapHandler.runObjectScripts() --run all loaded object scripts
 	end
 end
 
-function mapHandler.recalculatePositions(id) --recalculate object positions, for object scripts
+function mapHandler.recalculatePositions() --recalculate object positions, for object scripts
 	
 end
 
