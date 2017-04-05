@@ -1,6 +1,6 @@
 mapHandler = {}
 
-function mapHandler.loadWorld(indexFile, imageFile) --loads new world
+function mapHandler.loadWorld(indexFile, imageFile, worldScript) --loads new world
 	mapHandler.map = {} --objects to be rendered are put here, recalculated every time a new area is loaded
 	mapHandler.mapImages = require(imageFile)
 	mapHandler.globalIndex = require(indexFile) --load array of all avalible areas
@@ -10,11 +10,15 @@ end
 function mapHandler.loadArea(id) --loads area, but if called manually will get overwriten by recalculateAreas() if area isn't on screen
 	for i,v in ipairs(mapHandler.globalIndex) do
 		if v.id == id then
+			local _id = i
 			local insertTable = require(v.areaFile)
 			for i,v in ipairs(insertTable) do
 				if v.scriptFile ~= nil then
 					v.script = require(v.scriptFile)
 				end
+				v.aX = mapHandler.globalIndex[_id].x
+				v.aY = mapHandler.globalIndex[_id].y
+				v.inArea = _id
 				table.insert(mapHandler.map, v)
 			end
 			return true
@@ -60,13 +64,15 @@ end
 function mapHandler.runObjectScripts() --run all loaded object scripts
 	for i,v in ipairs(mapHandler.map) do
 		if v.script ~= nil then
+			v.x, v.y = v.x-v.aX, v.y-v.aY
 			v = v.script(v)
+			v.x, v.y = v.x+v.aX, v.y+v.aY
 		end
 	end
 end
 
-function mapHandler.recalculatePositions() --recalculate object positions, for object scripts
-	
+function mapHandler.runGlobalScript()
+
 end
 
 return mapHandler
