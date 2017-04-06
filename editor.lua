@@ -1,24 +1,24 @@
-require "player"
 require "mapHandler"
+require "input"
+
+input.addKeyToggle("showAreaLines", "f2")
 
 mapHandler.loadWorld("map/testWorld/globalIndex", "map/testWorld/globalImages")
 require "map/testWorld/globalScript"
 
-cam = {x = 0, y = 0}
+cam = {x = 0, y = 0, moveSpeed = 500}
 
 function love.update(dt)
 	if love.keyboard.isDown("w") then --would probably be a good idea to add a "inputconf.lua" file at some point
-		player.y = player.y - dt*player.moveSpeed
+		cam.y = cam.y - dt*cam.moveSpeed
 	elseif love.keyboard.isDown("s") then
-		player.y = player.y + dt*player.moveSpeed
+		cam.y = cam.y + dt*cam.moveSpeed
 	end
 	if love.keyboard.isDown("a") then
-		player.x = player.x - dt*player.moveSpeed
+		cam.x = cam.x - dt*cam.moveSpeed
 	elseif love.keyboard.isDown("d") then
-		player.x = player.x + dt*player.moveSpeed
+		cam.x = cam.x + dt*cam.moveSpeed
 	end
-	
-	cam.x, cam.y = player.x, player.y
 
 	if mapHandler.recalculateCheck(cam.x, cam.y, love.graphics.getWidth()-cam.x, love.graphics.getHeight()-cam.y) then
 		mapHandler.recalculateAreas(cam.x, cam.y, love.graphics.getWidth()-cam.x, love.graphics.getHeight()-cam.y)
@@ -36,5 +36,9 @@ function love.draw()
 		end
 	end
 	love.graphics.setColor(255,255,255)
-	love.graphics.rectangle("fill", (love.graphics.getWidth()/2)-player.sX, (love.graphics.getHeight()/2)-player.sY, 50, 50, 15, 15) --temporary "playermodel"
+	if input.getKeyToggle("showAreaLines") then
+		for i,v in ipairs(mapHandler.globalIndex) do
+			love.graphics.rectangle("line", v.x-cam.x, v.y-cam.y, v.sX, v.sY)
+		end
+	end
 end

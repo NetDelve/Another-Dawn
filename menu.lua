@@ -7,6 +7,9 @@ end
 
 function love.update(dt)
 	if suit.Button("Play Game", 50,100, 150,30).hit then
-		require "game" --no touchy
+		require "game"
+	end
+	if suit.Button("Development Editor", 50,200, 150,30).hit then
+		require "editor"
 	end
 end

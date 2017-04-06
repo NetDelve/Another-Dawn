@@ -19,6 +19,7 @@ function mapHandler.loadArea(id) --loads area, but if called manually will get o
 				v.aX = mapHandler.globalIndex[_id].x
 				v.aY = mapHandler.globalIndex[_id].y
 				v.inArea = _id
+				v.x, v.y = v.x + v.aX, v.y + v.aY
 				table.insert(mapHandler.map, v)
 			end
 			return true
