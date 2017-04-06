@@ -7,4 +7,7 @@ end
 
 function love.keypressed(key)
 	input.keypressed(key)
+	if key == "`" then
+		debug.debug() --enter love2d debug mode
+	end
 end

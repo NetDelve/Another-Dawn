@@ -1,17 +1,25 @@
 mapHandler = {}
-mapHandler.map = {} --objects to be rendered are put here, recalculated every time a new area is loaded
-mapHandler.globalIndex = require "map/globalIndex" --load array of all avalible areas
-mapHandler.loadedAreas = {}
 
-function mapHandler.loadAllSprites() --loads all images for all map areas, hopefully temporary until dynamic image loading is implimented
-	
+function mapHandler.loadWorld(indexFile, imageFile, worldScript) --loads new world
+	mapHandler.map = {} --objects to be rendered are put here, recalculated every time a new area is loaded
+	mapHandler.mapImages = require(imageFile)
+	mapHandler.globalIndex = require(indexFile) --load array of all avalible areas
+	mapHandler.loadedAreas = {}
 end
 
 function mapHandler.loadArea(id) --loads area, but if called manually will get overwriten by recalculateAreas() if area isn't on screen
 	for i,v in ipairs(mapHandler.globalIndex) do
 		if v.id == id then
-			local insertTable = require(v.mapFile)
+			local _id = i
+			local insertTable = require(v.areaFile)
 			for i,v in ipairs(insertTable) do
+				if v.scriptFile ~= nil then
+					v.script = require(v.scriptFile)
+				end
+				v.aX = mapHandler.globalIndex[_id].x
+				v.aY = mapHandler.globalIndex[_id].y
+				v.inArea = _id
+				v.x, v.y = v.x + v.aX, v.y + v.aY
 				table.insert(mapHandler.map, v)
 			end
 			return true
@@ -52,6 +60,20 @@ function mapHandler.recalculateAreas(x, y, sX, sY) --manages loaded areas based 
 	for i,v in ipairs(mapHandler.loadedAreas) do
 		mapHandler.loadArea(mapHandler.globalIndex[v].id)
 	end
+end
+
+function mapHandler.runObjectScripts() --run all loaded object scripts
+	for i,v in ipairs(mapHandler.map) do
+		if v.script ~= nil then
+			v.x, v.y = v.x-v.aX, v.y-v.aY
+			v = v.script(v)
+			v.x, v.y = v.x+v.aX, v.y+v.aY
+		end
+	end
+end
+
+function mapHandler.runGlobalScript()
+
 end
 
 return mapHandler
