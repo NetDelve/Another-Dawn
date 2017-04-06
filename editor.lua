@@ -22,6 +22,20 @@ function love.update(dt)
 		elseif love.keyboard.isDown("d") then
 			cam.x = cam.x + dt*cam.moveSpeed
 		end
+		for i,v in ipairs(mapHandler.map) do
+			if v.selected then
+				if love.keyboard.isDown("up") then
+					v.y = v.y - dt*cam.moveSpeed
+				elseif love.keyboard.isDown("down") then
+					v.y = v.y + dt*cam.moveSpeed
+				end
+				if love.keyboard.isDown("left") then
+					v.x = v.x - dt*cam.moveSpeed
+				elseif love.keyboard.isDown("right") then
+					v.x = v.x + dt*cam.moveSpeed
+				end
+			end
+		end
 	end
 
 	if mapHandler.recalculateCheck(cam.x, cam.y, love.graphics.getWidth()-cam.x, love.graphics.getHeight()-cam.y) then
