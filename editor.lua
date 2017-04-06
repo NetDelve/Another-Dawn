@@ -9,6 +9,7 @@ require "map/testWorld/globalScript"
 
 cam = {x = 0, y = 0, moveSpeed = 500}
 local objectSearch = {text = "", submitted = false}
+searchTable = {}
 function love.update(dt)
 	if not suit.hasKeyboardFocus(objectSearch) then
 		if love.keyboard.isDown("w") then --would probably be a good idea to add a "inputconf.lua" file at some point
@@ -30,13 +31,13 @@ function love.update(dt)
 	suit.Input(objectSearch, love.graphics.getWidth() - 195, 10, 190, 30)
 	searchTable = {}
 	for i,v in ipairs(images) do
-		if string.find(objectSearch.text, v.name) then
-			table.insert(searchTable, {object = i, global = true})
+		if string.find("global."..v.name, objectSearch.text) ~= nil then
+			table.insert(searchTable, {name = v.name, object = i, global = true})
 		end
 	end
 	for i,v in ipairs(mapHandler.mapImages) do
-		if string.find(objectSearch.text, v.name) then
-			table.insert(searchTable, {object = i, global = false})
+		if string.find("map."..v.name, objectSearch.text) ~= nil then
+			table.insert(searchTable, {name = v.name, object = i, global = false})
 		end
 	end
 end
@@ -59,10 +60,25 @@ function love.draw()
 	end
 	love.graphics.setColor(0,0,0)
 	love.graphics.rectangle("fill", love.graphics.getWidth() - 200, 0, 200, love.graphics.getHeight())
+	love.graphics.setColor(255,255,255)
 	suit.draw()
+	_pos = 100
 	for i,v in ipairs(searchTable) do
+		if v.global then
+			_name = "global."..v.name
+		else
+			_name = "map."..v.name
+		end
+		love.graphics.print(_name, love.graphics.getWidth()-195, _pos)
+		_pos = _pos + 25
+	end
 end
 
 function love.textinput(t)
     suit.textinput(t)
+end
+
+function love.keypressed(key, scancode, isRepeat)
+    suit.keypressed(key)
+	input.keypressed(key)
 end
