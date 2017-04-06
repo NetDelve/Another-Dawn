@@ -5,7 +5,7 @@ require "findImage"
 input.addKeyToggle("showAreaLines", "f2")
 
 mapHandler.loadWorld("map/testWorld/globalIndex", "map/testWorld/globalImages")
-require "map/testWorld/globalScript"
+--require "map/testWorld/globalScript"
 
 cam = {x = 0, y = 0, moveSpeed = 500}
 local objectSearch = {text = "", submitted = false}
@@ -27,7 +27,7 @@ function love.update(dt)
 	if mapHandler.recalculateCheck(cam.x, cam.y, love.graphics.getWidth()-cam.x, love.graphics.getHeight()-cam.y) then
 		mapHandler.recalculateAreas(cam.x, cam.y, love.graphics.getWidth()-cam.x, love.graphics.getHeight()-cam.y)
 	end
-	mapHandler.runObjectScripts()
+	--mapHandler.runObjectScripts()
 	suit.Input(objectSearch, love.graphics.getWidth() - 195, 10, 190, 30)
 	searchTable = {}
 	for i,v in ipairs(images) do
@@ -56,6 +56,7 @@ function love.draw()
 	if input.getKeyToggle("showAreaLines") then
 		for i,v in ipairs(mapHandler.globalIndex) do
 			love.graphics.rectangle("line", v.x-cam.x, v.y-cam.y, v.sX, v.sY)
+			love.graphics.print(v.id, v.x-cam.x, v.y-cam.y)
 		end
 	end
 	love.graphics.setColor(0,0,0)
@@ -71,6 +72,14 @@ function love.draw()
 		end
 		love.graphics.print(_name, love.graphics.getWidth()-195, _pos)
 		_pos = _pos + 25
+	end
+end
+
+function love.mousepressed( x, y, button, istouch )
+	if x < love.graphics.getWidth()-200 then
+		--object/area selection
+	else
+		--menu selection
 	end
 end
 
