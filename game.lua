@@ -1,5 +1,6 @@
 require "player"
 require "mapHandler"
+require "findImage"
 
 mapHandler.loadWorld("map/testWorld/globalIndex", "map/testWorld/globalImages")
 require "map/testWorld/globalScript"

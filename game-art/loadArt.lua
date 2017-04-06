@@ -1,3 +1,3 @@
 --Load global image files
 images = {}
-images.grass = love.graphics.newImage("game-art/ground/grass1.png")
+table.insert(images, {name = "grass", image = love.graphics.newImage("game-art/ground/grass1.png")})
