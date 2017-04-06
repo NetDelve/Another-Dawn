@@ -28,8 +28,16 @@ function love.update(dt)
 	end
 	mapHandler.runObjectScripts()
 	suit.Input(objectSearch, love.graphics.getWidth() - 195, 10, 190, 30)
+	searchTable = {}
 	for i,v in ipairs(images) do
-		
+		if string.find(objectSearch.text, v.name) then
+			table.insert(searchTable, {object = i, global = true})
+		end
+	end
+	for i,v in ipairs(mapHandler.mapImages) do
+		if string.find(objectSearch.text, v.name) then
+			table.insert(searchTable, {object = i, global = false})
+		end
 	end
 end
 
@@ -52,6 +60,7 @@ function love.draw()
 	love.graphics.setColor(0,0,0)
 	love.graphics.rectangle("fill", love.graphics.getWidth() - 200, 0, 200, love.graphics.getHeight())
 	suit.draw()
+	for i,v in ipairs(searchTable) do
 end
 
 function love.textinput(t)
