@@ -51,6 +51,11 @@ function love.draw()
 		else
 			love.graphics.draw(v.sprite, v.x-cam.x, v.y-cam.y)
 		end
+		if v.selected then
+			love.graphics.setColor(255,255,0)
+			love.graphics.rectangle("line", v.x-cam.x, v.y-cam.y, v.sX, v.sY)
+			love.graphics.setColor(255,255,255)
+		end
 	end
 	love.graphics.setColor(255,255,255)
 	if input.getKeyToggle("showAreaLines") then
@@ -77,8 +82,13 @@ end
 
 function love.mousepressed( x, y, button, istouch )
 	if x < love.graphics.getWidth()-200 then
+		_x, _y = x+cam.x, y+cam.y
 		for i,v in ipairs(mapHandler.map) do
-			
+			if _x >= v.x and _x <= v.x+v.sX and _y >= v.y and _y <= v.y+v.sY then
+				v.selected = true
+			else
+				v.selected = nil
+			end
 		end
 	else
 		--menu selection
