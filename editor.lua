@@ -77,7 +77,9 @@ end
 
 function love.mousepressed( x, y, button, istouch )
 	if x < love.graphics.getWidth()-200 then
-		--object/area selection
+		for i,v in ipairs(mapHandler.map) do
+			
+		end
 	else
 		--menu selection
 	end
