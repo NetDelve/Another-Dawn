@@ -1,0 +1,19 @@
+Another Dawn Engine
+Technical Description
+
+
+Green/Black = implemented, Orange = WIP, Red = not implemented
+
+
+Theory of Operation
+
+
+Each world is made up of many different areas. An area is a small chunk of the world, housing the objects that make up the game. Each object is a table usually 
+including the following variables: x, y: x and y position of the object based on the area position.
+
+
+Important Functions
+
+
+mapHandler.loadWorld(worldIndexFile, worldImageFile, worldScriptFile)
+Loads the world index file, containing file paths for all areas in world, and the world image file containing file paths for all world-dependent images.
