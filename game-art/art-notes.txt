@@ -1,4 +1,4 @@
-grid size (block size) 50x50
+grid size (block size) 32x32
 
 Stuff we are using 
 http://opengameart.org/content/some-plants
