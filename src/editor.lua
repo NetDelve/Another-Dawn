@@ -3,6 +3,7 @@ require "input"
 require "findImage"
 
 input.addKeyToggle("showAreaLines", "f2")
+input.addKeyToggle("searchmenu","f3")
 
 mapHandler.loadWorld("map/testWorld/globalIndex", "map/testWorld/globalImages")
 --require "map/testWorld/globalScript"
@@ -44,16 +45,16 @@ function love.update(dt)
 	--mapHandler.runObjectScripts()
 	suit.Input(objectSearch, love.graphics.getWidth() - 195, 10, 190, 30)
 	searchTable = {}
-	for i,v in ipairs(images) do
-		if string.find("global."..v.name, objectSearch.text) ~= nil then
-			table.insert(searchTable, {name = v.name, object = i, global = true})
-		end
-	end
-	for i,v in ipairs(mapHandler.mapImages) do
-		if string.find("map."..v.name, objectSearch.text) ~= nil then
-			table.insert(searchTable, {name = v.name, object = i, global = false})
-		end
-	end
+	--for i,v in ipairs(images) do
+	--	if string.find("global."..v.name, objectSearch.text) ~= nil then
+	--		table.insert(searchTable, {name = v.name, object = i, global = true})
+	--	end
+	--end
+	--for i,v in ipairs(mapHandler.mapImages) do
+	--	if string.find("map."..v.name, objectSearch.text) ~= nil then
+	--		table.insert(searchTable, {name = v.name, object = i, global = false})
+	--	end
+	--end
 end
 
 function love.draw()
@@ -78,6 +79,7 @@ function love.draw()
 			love.graphics.print(v.id, v.x-cam.x, v.y-cam.y)
 		end
 	end
+	if input.getKeyToggle("searchmenu") then
 	love.graphics.setColor(0,0,0)
 	love.graphics.rectangle("fill", love.graphics.getWidth() - 200, 0, 200, love.graphics.getHeight())
 	love.graphics.setColor(255,255,255)
@@ -91,6 +93,7 @@ function love.draw()
 		end
 		love.graphics.print(_name, love.graphics.getWidth()-195, _pos)
 		_pos = _pos + 25
+	end
 	end
 end
 
