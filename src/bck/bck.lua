@@ -15,7 +15,7 @@ end
 
 function bck.update(dt) --TODO multithread object scripts
 	for i,area in ipairs(bck.world) do
-		for o,object in ipairs(area) do
+		for o,object in ipairs(area.foreground) do
 			if bck.objects[object.type].script ~= nil then
 				if not pcall(bck.objects[object.type].script(i,o) then --run object script with error protection, i and o are to tell the script what object to run on
 					--error
@@ -25,14 +25,43 @@ function bck.update(dt) --TODO multithread object scripts
 	end
 end
 
-function bck.draw(camX, camY)
+function bck.drawForeground(camX, camY, sX, sY)
 	for i,area in ipairs(bck.world) do
-		for i,object in ipairs(area) do
-			if object.x+object.sX >= camX and object.x <= love.graphics.getWidth()+camX and object.y+object.sY >= camY and object.y <= love.graphics.getHeight()+camY and bck.objects[object.type].image ~= nil then
-				love.graphics.draw(bck.objects[object.type].image, object.x, object.y) --TODO add image scaling
+		for i,object in ipairs(area.foreground) do
+			if object.x+object.sX >= camX and object.x <= sX+camX and object.y+object.sY >= camY and object.y <= sY+camY then
+				if bck.objects[object.type].image ~= nil then
+					love.graphics.draw(bck.objects[object.type].image, object.x, object.y)
+				else
+					--missing image, draw some error thing
+				end
 			end
 		end
 	end
+end
+
+function bck.drawBackground(camX, camY, sX, sY)
+	for i,area in ipairs(bck.world) do
+		for i,object in ipairs(area.background) do
+			if object.x+object.sX >= camX and object.x <= sX+camX and object.y+object.sY >= camY and object.y <= sY+camY then
+				if bck.objects[object.type].image ~= nil then
+					love.graphics.draw(bck.objects[object.type].image, object.x, object.y)
+				else
+					--missing image, draw some error thing
+				end
+			end
+		end
+	end
+end
+
+function bck.drawToCanvas(camX, camY, sX, sY) --Viewport camera/offset, viewport size
+	local canvas = love.graphics.newCanvas(sX, sY)
+	love.graphics.setCanvas(canvas)
+		love.graphics.clear()
+		love.graphics.setBlendMode("alpha")
+		bck.drawBackground(camX, camY, sX, sY)
+		bck.drawForeground(camX, camY, sX, sY)
+	love.graphics.setCanvas()
+	return canvas
 end
 
 --Editor Stuff
