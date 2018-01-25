@@ -1,12 +1,42 @@
 game = {}
 require 'player'
 
+local floorCan = love.graphics.newCanvas( 100, 100 )
+local mainCan = love.graphics.newCanvas( love.graphics.getWidth(), love.graphics.getHeight() )
+
+local hud={}
+hud.canvas = love.graphics.newCanvas( love.graphics.getWidth(), love.graphics.getHeight()/4 )
+
+
 function game:draw()
-	if player.sprite ~= nil then
-		love.graphics.drive(player.sprite, player.x, player.y, player.sX, player.sY)
-	else
-		love.graphics.rectangle("fill", player.x+100, player.y+100, 50,50,15,15)
-	end
+     -- Start Canvas Assemble
+     -- floor canvas
+     	love.graphics.setCanvas(floorCan)
+	love.graphics.setCanvas()
+     -- main canvas
+     	love.graphics.setCanvas(mainCan)
+		love.graphics.clear()
+        	love.graphics.setBlendMode("alpha")
+        	--love.graphics.setColor(255, 0, 0, 128)
+		love.graphics.setColor(255, 255, 255, 255)
+  		if player.sprite ~= nil then
+			love.graphics.draw(player.sprite, player.x, player.y, player.sX, player.sY)
+		else
+			love.graphics.rectangle("fill", player.x+100, player.y+100, 50,50,15,15)
+		end
+	love.graphics.setCanvas()
+
+     -- hud canvas
+	love.graphics.setCanvas(hud.canvas)
+		love.graphics.clear()
+	love.graphics.setCanvas()
+     -- End Canvas Assemble
+     	
+     	love.graphics.setColor(255, 255, 255, 255)
+     	--love.graphics.setBlendMode("alpha", "premultiplied")
+	love.graphics.setBlendMode("alpha")
+    	love.graphics.draw(mainCan, 0, 0)
+
 end
 
 function game:update(dt)
