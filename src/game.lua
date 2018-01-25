@@ -1,6 +1,28 @@
 game = {}
+require 'player'
 
---require "player"
+function game:draw()
+	if player.sprite ~= nil then
+		love.graphics.drive(player.sprite, player.x, player.y, player.sX, player.sY)
+	else
+		love.graphics.rectangle("fill", player.x+100, player.y+100, 50,50,15,15)
+	end
+end
+
+function game:update(dt)
+	if love.keyboard.isDown("w") then
+		player.y = player.y - dt*player.moveSpeed
+	elseif love.keyboard.isDown("s")then
+		player.y = player.y + dt*player.moveSpeed
+	end
+	if love.keyboard.isDown("a") then
+		player.x = player.x - dt*player.moveSpeed
+	elseif love.keyboard.isDown("d") then
+		player.x = player.x + dt*player.moveSpeed
+	end
+
+end
+
 --require "mapHandler"
 --require "findImage"
 
