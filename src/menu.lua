@@ -15,6 +15,6 @@ function menu:update(dt)
 		Gamestate.switch(game)
 	end
 	if suit.Button("Development Editor", width/2-50,height/2, 150,30).hit then
-		GameState.switch(editorMenu)
+		--GameState.switch(editorMenu)
 	end
 end
