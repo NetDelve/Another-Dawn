@@ -14,7 +14,7 @@ function bck.loadWorld(file)
 end
 
 function bck.update(dt) --TODO multithread object scripts
-	for i,area in ipairs(bck.world) do
+	for i,area in pairs(bck.world) do
 		for o,object in ipairs(area.foreground) do
 			if bck.objects[object.type].script ~= nil then
 				if not pcall(bck.objects[object.type].script(i,o)) then --run object script with error protection, i and o are to tell the script what object to run on
@@ -26,9 +26,10 @@ function bck.update(dt) --TODO multithread object scripts
 end
 
 function bck.drawForeground(camX, camY, sX, sY)
-	for i,area in ipairs(bck.world) do
+	for i,area in pairs(bck.world) do
 		for i,object in ipairs(area.foreground) do
 			if (object.x+area.x)+object.sX >= camX and (object.x+area.x) <= sX+camX and (object.y+area.y)+object.sY >= camY and (object.y+area.y) <= sY+camY then
+				love.graphics.setColor(255,255,255,255)
 				if bck.objects[object.type].image ~= nil then
 					love.graphics.draw(bck.objects[object.type].image, object.x+area.x, object.y+area.y)
 				else
@@ -40,9 +41,10 @@ function bck.drawForeground(camX, camY, sX, sY)
 end
 
 function bck.drawBackground(camX, camY, sX, sY)
-	for i,area in ipairs(bck.world) do
+	for i,area in pairs(bck.world) do
 		for i,object in ipairs(area.background) do
 			if (object.x+area.x)+object.sX >= camX and (object.x+area.x) <= sX+camX and (object.y+area.y)+object.sY >= camY and (object.y+area.y) <= sY+camY then
+				love.graphics.setColor(255,255,255,255)				
 				if bck.objects[object.type].image ~= nil then
 					love.graphics.draw(bck.objects[object.type].image, object.x+area.x, object.y+area.y)
 				else
