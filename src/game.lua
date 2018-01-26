@@ -1,11 +1,16 @@
 game = {}
+Camera = require "libs.hump.camera"
 require 'player'
 
+camera = Camera(player.x, player.y)
+
 local floorCan = love.graphics.newCanvas( 100, 100 )
-local mainCan = love.graphics.newCanvas( love.graphics.getWidth(), love.graphics.getHeight() )
+local mainCan = love.graphics.newCanvas( love.graphics.getWidth()+100, love.graphics.getHeight()+100 )
 
 local hud={}
-hud.canvas = love.graphics.newCanvas( love.graphics.getWidth(), love.graphics.getHeight()/4 )
+hud.h = love.graphics.getHeight()/4
+hud.w = love.graphics.getWidth()
+hud.canvas = love.graphics.newCanvas( hud.w, hud.h)
 
 
 function game:draw()
@@ -29,6 +34,8 @@ function game:draw()
      -- hud canvas
 	love.graphics.setCanvas(hud.canvas)
 		love.graphics.clear()
+		love.graphics.setColor(50, 50, 50, 255)
+		love.graphics.rectangle("fill",0,0, hud.w, hud.h)
 	love.graphics.setCanvas()
      -- End Canvas Assemble
      	
@@ -36,6 +43,7 @@ function game:draw()
      	--love.graphics.setBlendMode("alpha", "premultiplied")
 	love.graphics.setBlendMode("alpha")
     	love.graphics.draw(mainCan, 0, 0)
+	love.graphics.draw(hud.canvas, 0, love.graphics.getHeight()-hud.h)
 
 end
 
@@ -50,7 +58,9 @@ function game:update(dt)
 	elseif love.keyboard.isDown("d") then
 		player.x = player.x + dt*player.moveSpeed
 	end
-
+	
+	local dx,dy = player.x - camera.x, player.y - camera.y
+    	camera:move(dy/2, dx/2)
 end
 
 --require "mapHandler"
