@@ -1,3 +1,4 @@
+-- editor = {}
 gui = require 'gui'
 
 config = {viewportSize = {x = 640, y = 480}}
