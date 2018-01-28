@@ -2,6 +2,7 @@
 gui = require 'gui'
 
 config = {viewportSize = {x = 640, y = 480}}
+camX, camY = 0, 0
 
 bck.newArea("test", 0, 0, 500, 500)
 bck.newObject("test", 50, 50, false, false)
