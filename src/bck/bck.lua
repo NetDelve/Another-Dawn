@@ -77,11 +77,11 @@ function bck.newArea(id, _x, _y, _sX, _sY)
 end
 
 function bck.placeForeground(area, _x, _y, _type)
-	bck.world[area].foreground = {x = _x, y = _y, type = _type}
+	table.insert(bck.world[area].foreground, {x = _x, y = _y, type = _type})
 end
 
 function bck.placeBackground(area, _x, _y, _type)
-	bck.world[area].background = {x = _x, y = _y, type = _type}
+	table.insert(bck.world[area].background, {x = _x, y = _y, type = _type})
 end
 
 return bck
