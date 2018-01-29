@@ -43,7 +43,7 @@ end
 function bck.drawBackground(camX, camY, sX, sY)
 	for i,area in pairs(bck.world) do
 		for i,object in ipairs(area.background) do
-			if (object.x+area.x)+object.sX >= camX and (object.x+area.x) <= sX+camX and (object.y+area.y)+object.sY >= camY and (object.y+area.y) <= sY+camY then
+			if (object.x+area.x) >= camX and (object.x+area.x)+bck.objects[object.type].sX <= sX+camX and (object.y+area.y) >= camY and (object.y+area.y)+bck.objects[object.type].sY <= sY+camY then
 				love.graphics.setColor(255,255,255,255)				
 				if bck.objects[object.type].image ~= nil then
 					love.graphics.draw(bck.objects[object.type].image, object.x+area.x, object.y+area.y)
