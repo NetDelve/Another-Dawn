@@ -18,7 +18,7 @@ end
 function love.draw()
 	love.graphics.setColor(255,255,255,255)
 	love.graphics.setBlendMode("alpha", "premultiplied")
-	love.graphics.draw(frame, 0, 0, (love.graphics.getWidth()-100)/config.viewportSize.x, love.graphics.getHeight()/config.viewportSize.y)
+	love.graphics.draw(frame, 0, 0, 0, (love.graphics.getWidth()-100)/config.viewportSize.x, love.graphics.getHeight()/config.viewportSize.y)
 	love.graphics.setColor(100,100,100)
 	love.graphics.rectangle("fill", love.graphics.getWidth()-100, 0, 100, love.graphics.getHeight()) --right place object menu
 end
