@@ -1,5 +1,5 @@
-local gui = {}
-local gui.elements = {}
+gui = {}
+gui.elements = {}
 
 function gui.newButton(_id, _text, _x, _y, _sX, _sY, _state)
 	table.insert(gui.elements, {button, id = _id, text = _text, x = _x, y = _y, sX = _sX, sY = _sY, state = _state})
