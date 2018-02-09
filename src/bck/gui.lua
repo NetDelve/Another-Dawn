@@ -17,7 +17,11 @@ function gui.newMenu(_id)
 	table.insert(gui.elements, {menu,id=_id})
 end
 
-function gui.mousePressed(x, y, button)
+function gui.newTextBox()
+
+end
+
+function gui.mousepressed(x, y, button)
 	for i,v in pairs(gui.elements) do
 		if x >= v.x and x <= v.x+v.sX and y >= v.y and y <= v.y+v.sY then
 			if v.state then
@@ -29,7 +33,7 @@ function gui.mousePressed(x, y, button)
 	end
 end
 
-function gui.keyPressed(key, isRepeat)
+function gui.keypressed(key, isrepeat)
 
 end
 
