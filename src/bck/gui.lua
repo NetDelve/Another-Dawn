@@ -17,10 +17,6 @@ function gui.newMenu(_id)
 	table.insert(gui.elements, {menu,id=_id})
 end
 
-function gui.newTextBox()
-
-end
-
 function gui.mousepressed(x, y, button)
 	for i,v in pairs(gui.elements) do
 		if x >= v.x and x <= v.x+v.sX and y >= v.y and y <= v.y+v.sY then
