@@ -1,8 +1,20 @@
-gui = {}
-gui.elements = {}
+local gui = {}
+local gui.elements = {}
 
-function gui.newButton(_id, _text, _x, _y, _sX, _sY, _key, _state)
-	table.insert(gui.elements, {id = _id, text = _text, x = _x, y = _y, sX = _sX, sY = _sY, key = _key, state = _state})
+function gui.newButton(_id, _text, _x, _y, _sX, _sY, _state)
+	table.insert(gui.elements, {button, id = _id, text = _text, x = _x, y = _y, sX = _sX, sY = _sY, state = _state})
+end
+
+function gui.newTextbox(_id, _x, _y, _key)
+	table.insert(gui.elements, {textbox, id=_id, x=_x, y=_y, key=_key})
+end
+
+function gui.newSlider(_id, _x, _y, _num)
+	table.insert(gui.elements, {slider, id=_id, x=_x, y=_y, num=_num})
+end
+
+function gui.newMenu(_id)
+	table.insert(gui.elements, {menu,id=_id})
 end
 
 function gui.mousePressed(x, y, button)
