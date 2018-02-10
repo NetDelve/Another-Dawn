@@ -1,12 +1,12 @@
 -- editor = {}
 gui = require 'gui'
 
---config = {viewportSize = {x = 640, y = 480}}
+config = {gridSize = {x = 50, y = 50}} --TODO make own file
 camX, camY = 0, 0
 
-bck.newArea("test", 0, 0, 500, 500)
-bck.newObject("test", 50, 50, false, false)
-bck.placeForeground("test", 10, 10, "test")
+bck.newArea("test", 0, 0, 50, 50)
+bck.newObject("test", 1, 1, false, false)
+bck.placeForeground("test", 2, 2, "test")
 
 local HudCan = love.graphics.newCanvas(love.graphics.getWidth(),love.graphics.getHeight()/4)
 local rMenuCan = love.graphics.newCanvas()
