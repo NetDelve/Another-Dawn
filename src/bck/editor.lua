@@ -8,6 +8,11 @@ bck.newArea("test", 0, 0, 500, 500)
 bck.newObject("test", 50, 50, false, false)
 bck.placeForeground("test", 10, 10, "test")
 
+local HudCan = love.graphics.newCanvas(love.graphics.getWidth(),love.graphics.getHeight()/4)
+local rMenuCan = love.graphics.newCanvas()
+local lMenuCan = love.graphics.newCanvas()
+local popupMenuCan = love.graphics.newCanvas()
+
 function love.update(dt)
 	if enableScripts then --TODO menu toggle
 		bck.update(dt)
