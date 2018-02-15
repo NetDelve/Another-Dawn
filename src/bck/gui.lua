@@ -35,7 +35,7 @@ end
 
 function gui.draw()
 	for i,v in pairs(gui.elements) do
-		love.graphics.setColor(50,50,50)
+		love.graphics.setColor(50,50,100)
 		love.graphics.rectangle("fill", v.x, v.y, v.sX, v.sY)
 		love.graphics.setColor(255,255,255)
 		love.graphics.print(v.text, v.x + 10, v.y + 10)
