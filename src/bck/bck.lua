@@ -35,9 +35,9 @@ function bck.drawForeground(camX, camY, sX, sY)
 			if (objRealX+areaRealX) >= camX and (objRealX+areaRealX)+((bck.objects[object.type].sX)*config.gridSize.x) <= sX+camX and (objRealY+areaRealY) >= camY and (objRealY+areaRealY)+((bck.objects[object.type].sY)*config.gridSize.y) <= sY+camY then
 				love.graphics.setColor(255,255,255,255)
 				if bck.objects[object.type].image ~= nil then
-					love.graphics.draw(bck.objects[object.type].image, objRealX+areaRealX, objRealY+areaRealY)
+					love.graphics.draw(bck.objects[object.type].image, camX+(objRealX+areaRealX), camY+(objRealY+areaRealY))
 				else
-					love.graphics.rectangle("fill", objRealX+areaRealX, objRealY+areaRealY, bck.objects[object.type].sX*config.gridSize.x, bck.objects[object.type].sY*config.gridSize.y)	--missing image, draw some error thing
+					love.graphics.rectangle("fill", camX+(objRealX+areaRealX), camY+(objRealY+areaRealY), bck.objects[object.type].sX*config.gridSize.x, bck.objects[object.type].sY*config.gridSize.y)	--missing image, draw some error thing
 				end
 			end
 		end
@@ -54,9 +54,9 @@ function bck.drawBackground(camX, camY, sX, sY)
 			if (objRealX+areaRealX) >= camX and (objRealX+areaRealX)+((bck.objects[object.type].sX)*config.gridSize.x) <= sX+camX and (objRealY+areaRealY) >= camY and (objRealY+areaRealY)+((bck.objects[object.type].sY)*config.gridSize.y) <= sY+camY then
 				love.graphics.setColor(255,255,255,255)
 				if bck.objects[object.type].image ~= nil then
-					love.graphics.draw(bck.objects[object.type].image, objRealX+areaRealX, objRealY+areaRealY)
+					love.graphics.draw(bck.objects[object.type].image, camX+(objRealX+areaRealX), camY+(objRealY+areaRealY))
 				else
-					love.graphics.rectangle("fill", objRealX+areaRealX, objRealY+areaRealY, bck.objects[object.type].sX*config.gridSize.x, bck.objects[object.type].sY*config.gridSize.y)	--missing image, draw some error thing
+					love.graphics.rectangle("fill", camX+(objRealX+areaRealX), camY+(objRealY+areaRealY), bck.objects[object.type].sX*config.gridSize.x, bck.objects[object.type].sY*config.gridSize.y)	--missing image, draw some error thing
 				end
 			end
 		end
