@@ -25,15 +25,16 @@ function love.update(dt)
 
 	suit.layout:reset(10, love.graphics.getHeight()-10)
 
-	if not suit.anyActive() then
+	if not suit.hasKeyboardFocus() then
 		if love.keyboard.isDown("w") then
 			camY = camY - camSpeed*dt
 		elseif love.keyboard.isDown("s") then
 			camY = camY + camSpeed*dt
-		elseif love.keyboard.isDown("a") then
-			camX = camX + camSpeed*dt
-		elseif love.keyboard.isDown("d") then
+		end
+		if love.keyboard.isDown("a") then
 			camX = camX - camSpeed*dt
+		elseif love.keyboard.isDown("d") then
+			camX = camX + camSpeed*dt
 		end
 	end
 

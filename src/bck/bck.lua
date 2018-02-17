@@ -25,15 +25,24 @@ function bck.update(dt) --TODO multithread object scripts
 	end
 end
 
+local function checkCollision(x1,y1,w1,h1, x2,y2,w2,h2)
+  return x1 < x2+w2 and
+         x2 < x1+w1 and
+         y1 < y2+h2 and
+         y2 < y1+h1
+end
+
 function bck.drawForeground(camX, camY, sX, sY)
+	love.graphics.setColor(255,255,255,255)
 	for i,area in pairs(bck.world) do
 		local areaRealX = area.x*config.gridSize.x
 		local areaRealY = area.y*config.gridSize.y
-		for i,object in ipairs(area.foreground) do
-			local objRealX = object.x*config.gridSize.x
-			local objRealY = object.y*config.gridSize.y
-			if (objRealX+areaRealX) >= camX and (objRealX+areaRealX)+((bck.objects[object.type].sX)*config.gridSize.x) <= sX+camX and (objRealY+areaRealY) >= camY and (objRealY+areaRealY)+((bck.objects[object.type].sY)*config.gridSize.y) <= sY+camY then
-				love.graphics.setColor(255,255,255,255)
+		local areaRealSX = area.sX*config.gridSize.x
+		local areaRealSY = area.sY*config.gridSize.y
+		if checkCollision(areaRealX, areaRealY, areaRealSX, areaRealSY, camX, camY, sX, sY) then
+			for i,object in ipairs(area.foreground) do
+				local objRealX = object.x*config.gridSize.x
+				local objRealY = object.y*config.gridSize.y
 				if bck.objects[object.type].image ~= nil then
 					love.graphics.draw(bck.objects[object.type].image, camX+(objRealX+areaRealX), camY+(objRealY+areaRealY))
 				else
@@ -45,14 +54,16 @@ function bck.drawForeground(camX, camY, sX, sY)
 end
 
 function bck.drawBackground(camX, camY, sX, sY)
+	love.graphics.setColor(255,255,255,255)
 	for i,area in pairs(bck.world) do
 		local areaRealX = area.x*config.gridSize.x
 		local areaRealY = area.y*config.gridSize.y
-		for i,object in ipairs(area.background) do
-			local objRealX = object.x*config.gridSize.x
-			local objRealY = object.y*config.gridSize.y
-			if (objRealX+areaRealX) >= camX and (objRealX+areaRealX)+((bck.objects[object.type].sX)*config.gridSize.x) <= sX+camX and (objRealY+areaRealY) >= camY and (objRealY+areaRealY)+((bck.objects[object.type].sY)*config.gridSize.y) <= sY+camY then
-				love.graphics.setColor(255,255,255,255)
+		local areaRealSX = area.sX*config.gridSize.x
+		local areaRealSY = area.sY*config.gridSize.y
+		if checkCollision(areaRealX, areaRealY, areaRealSX, areaRealSY, camX, camY, sX, sY) then
+			for i,object in ipairs(area.background) do
+				local objRealX = object.x*config.gridSize.x
+				local objRealY = object.y*config.gridSize.y
 				if bck.objects[object.type].image ~= nil then
 					love.graphics.draw(bck.objects[object.type].image, camX+(objRealX+areaRealX), camY+(objRealY+areaRealY))
 				else
