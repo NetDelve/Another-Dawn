@@ -15,25 +15,41 @@ local lMenuCan = love.graphics.newCanvas()
 local popupMenuCan = love.graphics.newCanvas()
 
 local input = {text = ""}
+local objSearch = {text = "", submitted = false}
 function love.update(dt)
 	suit.layout:reset(10, 10) --left menu (edit object)
 	suit.Input(input, suit.layout:row(80, 30))
 	
-	suit.layout:reset(love.graphics.getWidth()-90, 10) --right menu (place object)
+	suit.layout:reset(love.graphics.getWidth()-190, 10) --right menu (place object)
+	suit.Input(objSearch, suit.layout:row(180, 30))
+	if objSearch.submitted then
+		print("yeah")
+		for i,v in ipairs(bck.objects) do
+			if string.find(i, objSearch.text) ~= nil then
+				if type(v.image) == "imagedata" then
+					suit.ImageButton(v.image, suit.layout:row())
+				else
+					
+				end
+				suit.Label(i, suit.layout:row())
+			end
+		end
+		objSearch.submitted = false
+	end
 
 	suit.layout:reset(10, 10) --top menu (menu)
 
-	suit.layout:reset(10, love.graphics.getHeight()-10)
+	suit.layout:reset(10, love.graphics.getHeight()-10) --info (mouse x,y)
 
-	if not suit.hasKeyboardFocus() then
-		if love.keyboard.isDown("w") then
+	if not suit.hasKeyboardFocus() then --perhaps fix this so wasd can be used
+		if love.keyboard.isDown("up") then
 			camY = camY - camSpeed*dt
-		elseif love.keyboard.isDown("s") then
+		elseif love.keyboard.isDown("down") then
 			camY = camY + camSpeed*dt
 		end
-		if love.keyboard.isDown("a") then
+		if love.keyboard.isDown("left") then
 			camX = camX - camSpeed*dt
-		elseif love.keyboard.isDown("d") then
+		elseif love.keyboard.isDown("right") then
 			camX = camX + camSpeed*dt
 		end
 	end
@@ -50,9 +66,9 @@ function love.draw()
 	love.graphics.draw(frame, 0, 0)
 	love.graphics.setBlendMode("alpha")
 
-	--[[love.graphics.setColor(0,0,0)
-	love.graphics.rectangle("fill", love.graphics.getWidth()-100, 0, 100, love.graphics.getHeight())
-	love.graphics.rectangle("fill", 0, love.graphics.getHeight()-100, love.graphics.getWidth(), 100)]]
+	love.graphics.setColor(200,200,200)
+	love.graphics.rectangle("fill", love.graphics.getWidth()-200, 0, 200, love.graphics.getHeight())
+	love.graphics.rectangle("fill", 0, love.graphics.getHeight()-25, love.graphics.getWidth(), 25)
 	suit.draw()
 end
 
