@@ -14,18 +14,18 @@ local rMenuCan = love.graphics.newCanvas()
 local lMenuCan = love.graphics.newCanvas()
 local popupMenuCan = love.graphics.newCanvas()
 
+love.keyboard.setKeyRepeat(true)
 local input = {text = ""}
-local objSearch = {text = "", submitted = false}
+local objSearchInput = {text = ""}
 function love.update(dt)
 	suit.layout:reset(10, 10) --left menu (edit object)
 	suit.Input(input, suit.layout:row(80, 30))
 	
 	suit.layout:reset(love.graphics.getWidth()-190, 10) --right menu (place object)
-	suit.Input(objSearch, suit.layout:row(180, 30))
-	if objSearch.submitted then
-		print("yeah")
-		for i,v in ipairs(bck.objects) do
-			if string.find(i, objSearch.text) ~= nil then
+	local search = suit.Input(objSearchInput, suit.layout:row(180, 30))
+	if search.submitted then
+		for i,v in pairs(bck.objects) do
+			if string.find(i, objSearchInput.text) ~= nil then
 				if type(v.image) == "imagedata" then
 					suit.ImageButton(v.image, suit.layout:row())
 				else
@@ -34,7 +34,6 @@ function love.update(dt)
 				suit.Label(i, suit.layout:row())
 			end
 		end
-		objSearch.submitted = false
 	end
 
 	suit.layout:reset(10, 10) --top menu (menu)
@@ -43,14 +42,14 @@ function love.update(dt)
 
 	if not suit.hasKeyboardFocus() then --perhaps fix this so wasd can be used
 		if love.keyboard.isDown("up") then
-			camY = camY - camSpeed*dt
-		elseif love.keyboard.isDown("down") then
 			camY = camY + camSpeed*dt
+		elseif love.keyboard.isDown("down") then
+			camY = camY - camSpeed*dt
 		end
 		if love.keyboard.isDown("left") then
-			camX = camX - camSpeed*dt
-		elseif love.keyboard.isDown("right") then
 			camX = camX + camSpeed*dt
+		elseif love.keyboard.isDown("right") then
+			camX = camX - camSpeed*dt
 		end
 	end
 
