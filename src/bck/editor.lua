@@ -1,7 +1,7 @@
 suit = require 'suit'
 
 config = {gridSize = {x = 50, y = 50}} --TODO make own file
-editor = {viewport = {x = 0, y = 0, moveSpeed = 500}} --for editor only settings and variables
+editor = {viewport = {x = 0, y = 0, moveSpeed = 500}, selected = {area = "test", object = 0, objectType = "test"}} --for editor only settings and variables
 
 bck.newArea("test", 0, 0, 50, 50)
 bck.newObject("test", 1, 1, false, false)
@@ -16,10 +16,10 @@ love.keyboard.setKeyRepeat(true)
 local input = {text = ""}
 local objSearchInput = {text = ""}
 function love.update(dt)
-	suit.layout:reset(10, 10) --left menu (edit object)
-	suit.Input(input, suit.layout:row(80, 30))
+	suit.layout:reset(10, 35) --left menu (edit object)
+	suit.Input(input, suit.layout:row(180, 30))
 	
-	suit.layout:reset(love.graphics.getWidth()-190, 10) --right menu (place object)
+	suit.layout:reset(love.graphics.getWidth()-190, 35) --right menu (place object)
 	suit.Input(objSearchInput, suit.layout:row(180, 30))
 	for i,v in pairs(bck.objects) do
 		if string.find(i, objSearchInput.text) ~= nil then
@@ -30,16 +30,16 @@ function love.update(dt)
 				if suit.Button("No Image", suit.layout:row()).hit then hit = true end
 			end
 			suit.Label(tostring(i), {color = {normal={fg={0,0,0}}}}, suit.layout:row())
-			if hit then --object was clicked, place into world
-				
+			if hit then
+				objectType = i
 			end
 		end
 	end
 
 	suit.layout:reset(10, 10) --top menu (menu)
 
-	suit.layout:reset(10, love.graphics.getHeight()-15) --info (mouse x,y)
-	suit.Label("Mouse: "..round((love.mouse.getX()-editor.viewport.x)/config.gridSize.x)..","..round((love.mouse.getY()-editor.viewport.y)/config.gridSize.y), {color = {normal={fg={0,0,0}}}, align = "left"}, suit.layout:col(200,10))
+	suit.layout:reset(10, love.graphics.getHeight()-15) --bottom menu (general info)
+	suit.Label("Mouse: "..round(((love.mouse.getX()-200)-editor.viewport.x)/config.gridSize.x,2)..","..round(((love.mouse.getY()-25)-editor.viewport.y)/config.gridSize.y,2), {color = {normal={fg={0,0,0}}}, align = "left"}, suit.layout:col(200,10))
 
 	if not suit.hasKeyboardFocus() then --perhaps fix this so wasd can be used
 		if love.keyboard.isDown("up") then
@@ -57,19 +57,31 @@ function love.update(dt)
 	if enableScripts then --TODO menu toggle
 		bck.update(dt)
 	end
-	frame = bck.drawToCanvas(editor.viewport.x, editor.viewport.y, love.graphics.getWidth()-100, love.graphics.getHeight()-100)
+	frame = bck.drawToCanvas(editor.viewport.x, editor.viewport.y, love.graphics.getWidth()-400, love.graphics.getHeight()-50)
 end
 
 function love.draw()
 	love.graphics.setColor(255,255,255,255)
 	love.graphics.setBlendMode("alpha", "premultiplied")
-	love.graphics.draw(frame, 0, 0)
+	love.graphics.draw(frame, 200, 25)
 	love.graphics.setBlendMode("alpha")
 
-	love.graphics.setColor(200,200,200)
+	love.graphics.setColor(255,255,255)
+	love.graphics.rectangle("fill", 0, 0, love.graphics.getWidth(), 25)
+	love.graphics.rectangle("fill", 0, 0, 200, love.graphics.getHeight())
 	love.graphics.rectangle("fill", love.graphics.getWidth()-200, 0, 200, love.graphics.getHeight())
 	love.graphics.rectangle("fill", 0, love.graphics.getHeight()-25, love.graphics.getWidth(), 25)
 	suit.draw()
+end
+
+function love.mousepressed(x, y, button, istouch)
+	if x > 200 and x < love.graphics.getWidth()-200 and y > 25 and y < love.graphics.getHeight()-25 then
+		if button == 1 then
+			bck.placeForeground(editor.selected.area, round(((x-200)-editor.viewport.x)/config.gridSize.x), round(((y-25)-editor.viewport.y)/config.gridSize.y), editor.selected.objectType)
+		elseif button == 2 then
+			bck.placeBackground(editor.selected.area, round(((x-200)-editor.viewport.x)/config.gridSize.x), round(((y-25)-editor.viewport.y)/config.gridSize.y), editor.selected.objectType)
+		end
+	end
 end
 
 function love.keypressed(key, scancode, isrepeat)
