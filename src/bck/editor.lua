@@ -38,7 +38,8 @@ function love.update(dt)
 
 	suit.layout:reset(10, 10) --top menu (menu)
 
-	suit.layout:reset(10, love.graphics.getHeight()-10) --info (mouse x,y)
+	suit.layout:reset(10, love.graphics.getHeight()-15) --info (mouse x,y)
+	suit.Label("Mouse: "..round((love.mouse.getX()-editor.viewport.x)/config.gridSize.x)..","..round((love.mouse.getY()-editor.viewport.y)/config.gridSize.y), {color = {normal={fg={0,0,0}}}, align = "left"}, suit.layout:col(200,10))
 
 	if not suit.hasKeyboardFocus() then --perhaps fix this so wasd can be used
 		if love.keyboard.isDown("up") then
@@ -77,4 +78,8 @@ end
 
 function love.textinput(text)
 	suit.textinput(text)
+end
+
+function round(num, numDecimalPlaces)
+  return tonumber(string.format("%." .. (numDecimalPlaces or 0) .. "f", num))
 end
