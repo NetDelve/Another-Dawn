@@ -1,9 +1,7 @@
--- editor = {}
 suit = require 'suit'
 
 config = {gridSize = {x = 50, y = 50}} --TODO make own file
-camX, camY = 0, 0
-camSpeed = 500
+editor = {viewport = {x = 0, y = 0, moveSpeed = 500}} --for editor only settings and variables
 
 bck.newArea("test", 0, 0, 50, 50)
 bck.newObject("test", 1, 1, false, false)
@@ -22,16 +20,18 @@ function love.update(dt)
 	suit.Input(input, suit.layout:row(80, 30))
 	
 	suit.layout:reset(love.graphics.getWidth()-190, 10) --right menu (place object)
-	local search = suit.Input(objSearchInput, suit.layout:row(180, 30))
-	if search.submitted then
-		for i,v in pairs(bck.objects) do
-			if string.find(i, objSearchInput.text) ~= nil then
-				if type(v.image) == "imagedata" then
-					suit.ImageButton(v.image, suit.layout:row())
-				else
-					
-				end
-				suit.Label(i, suit.layout:row())
+	suit.Input(objSearchInput, suit.layout:row(180, 30))
+	for i,v in pairs(bck.objects) do
+		if string.find(i, objSearchInput.text) ~= nil then
+			local hit = false
+			if type(v.image) == "imagedata" then
+				if suit.ImageButton(v.image, suit.layout:row()).hit then hit = true end
+			else
+				if suit.Button("No Image", suit.layout:row()).hit then hit = true end
+			end
+			suit.Label(tostring(i), {color = {normal={fg={0,0,0}}}}, suit.layout:row())
+			if hit then --object was clicked, place into world
+				
 			end
 		end
 	end
@@ -42,21 +42,21 @@ function love.update(dt)
 
 	if not suit.hasKeyboardFocus() then --perhaps fix this so wasd can be used
 		if love.keyboard.isDown("up") then
-			camY = camY + camSpeed*dt
+			editor.viewport.y = editor.viewport.y + editor.viewport.moveSpeed*dt
 		elseif love.keyboard.isDown("down") then
-			camY = camY - camSpeed*dt
+			editor.viewport.y = editor.viewport.y - editor.viewport.moveSpeed*dt
 		end
 		if love.keyboard.isDown("left") then
-			camX = camX + camSpeed*dt
+			editor.viewport.x = editor.viewport.x + editor.viewport.moveSpeed*dt
 		elseif love.keyboard.isDown("right") then
-			camX = camX - camSpeed*dt
+			editor.viewport.x = editor.viewport.x - editor.viewport.moveSpeed*dt
 		end
 	end
 
 	if enableScripts then --TODO menu toggle
 		bck.update(dt)
 	end
-	frame = bck.drawToCanvas(camX, camY, love.graphics.getWidth()-100, love.graphics.getHeight()-100)
+	frame = bck.drawToCanvas(editor.viewport.x, editor.viewport.y, love.graphics.getWidth()-100, love.graphics.getHeight()-100)
 end
 
 function love.draw()
