@@ -1,5 +1,10 @@
 suit = require 'suit'
 
+slw = require 'slw'
+testtable = {"one" , "test" , "beep"}
+slw.savedata( testtable , "test.txt" )
+
+
 config = {gridSize = {x = 50, y = 50}} --TODO make own file
 editor = {viewport = {x = 0, y = 0, moveSpeed = 500}, selected = {area = "test", object = 0, objectType = "test"}} --for editor only settings and variables
 
