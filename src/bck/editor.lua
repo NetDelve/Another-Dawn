@@ -6,7 +6,10 @@ slw.savedata( testtable , "test.txt" )
 
 
 config = {gridSize = {x = 50, y = 50}} --TODO make own file
-editor = {viewport = {x = 0, y = 0, moveSpeed = 500}, selected = {area = "test", object = 0, objectType = "test"}} --for editor only settings and variables
+editor = {} --for editor only settings and variables
+editor.viewport = {x = 0, y = 0, moveSpeed = 500}
+editor.selected = {area = "test", object = 0, layer = "", objectType = "test", tool = "select"}
+editor.view = {areaBoundries = true}
 
 bck.newArea("test", 0, 0, 50, 50)
 bck.newObject("test", 1, 1, false, false)
@@ -25,6 +28,17 @@ function love.update(dt)
 	suit.Input(input, suit.layout:row(180, 30))
 	
 	suit.layout:reset(love.graphics.getWidth()-190, 35) --right menu (place object)
+	suit.Label("Mouse Tool", {color = {normal={fg={0,0,0}}}}, suit.layout:row(180, 30))
+	if suit.Button("Select", suit.layout:row(60, 30)).hit then
+		editor.selected.tool = "select"
+	end
+	if suit.Button("Place", suit.layout:col()).hit then
+		editor.selected.tool = "place"
+	end
+	if suit.Button("Remove", suit.layout:col()).hit then
+		editor.selected.tool = "remove"
+	end
+	suit.layout:reset(love.graphics.getWidth()-190, 100)
 	suit.Input(objSearchInput, suit.layout:row(180, 30))
 	for i,v in pairs(bck.objects) do
 		if string.find(i, objSearchInput.text) ~= nil then
@@ -44,7 +58,8 @@ function love.update(dt)
 	suit.layout:reset(10, 10) --top menu (menu)
 
 	suit.layout:reset(10, love.graphics.getHeight()-15) --bottom menu (general info)
-	suit.Label("Mouse: "..round(((love.mouse.getX()-200)-editor.viewport.x)/config.gridSize.x,2)..","..round(((love.mouse.getY()-25)-editor.viewport.y)/config.gridSize.y,2), {color = {normal={fg={0,0,0}}}, align = "left"}, suit.layout:col(200,10))
+	local x, y = bck.transformToGrid(love.mouse.getX()-200-editor.viewport.x, love.mouse.getY()-25-editor.viewport.y)
+	suit.Label("Mouse: "..x..","..y, {color = {normal={fg={0,0,0}}}, align = "left"}, suit.layout:col(200,10))
 
 	if not suit.hasKeyboardFocus() then --perhaps fix this so wasd can be used
 		if love.keyboard.isDown("up") then
@@ -70,6 +85,18 @@ function love.draw()
 	love.graphics.setBlendMode("alpha", "premultiplied")
 	love.graphics.draw(frame, 200, 25)
 	love.graphics.setBlendMode("alpha")
+	if editor.view.areaBoundries then
+		love.graphics.rectangle("line", editor.viewport.x+(bck.world[editor.selected.area].x*config.gridSize.x), editor.viewport.y+(bck.world[editor.selected.area].y*config.gridSize.y), bck.world[editor.selected.area].sX*config.gridSize.x, bck.world[editor.selected.area].sY*config.gridSize.y)
+	end
+	if editor.selected.layer == "foreground" then
+		local x = editor.viewport.x+(bck.world[editor.selected.area].x+bck.world[editor.selected.area].foreground[editor.selected.object].x)*config.gridSize.x
+		local y = editor.viewport.y+(bck.world[editor.selected.area].y+bck.world[editor.selected.area].foreground[editor.selected.object].y)*config.gridSize.y
+		local sX = bck.objects[bck.world[editor.selected.area].foreground[editor.selected.object].type].sX
+		local sY = bck.objects[bck.world[editor.selected.area].foreground[editor.selected.object].type].sY
+		love.graphics.rectangle("line", x, y, sX, sY)
+	elseif editor.selected.layer == "background" then
+
+	end
 
 	love.graphics.setColor(255,255,255)
 	love.graphics.rectangle("fill", 0, 0, love.graphics.getWidth(), 25)
@@ -80,11 +107,28 @@ function love.draw()
 end
 
 function love.mousepressed(x, y, button, istouch)
-	if x > 200 and x < love.graphics.getWidth()-200 and y > 25 and y < love.graphics.getHeight()-25 then
-		if button == 1 then
-			bck.placeForeground(editor.selected.area, round(((x-200)-editor.viewport.x)/config.gridSize.x), round(((y-25)-editor.viewport.y)/config.gridSize.y), editor.selected.objectType)
-		elseif button == 2 then
-			bck.placeBackground(editor.selected.area, round(((x-200)-editor.viewport.x)/config.gridSize.x), round(((y-25)-editor.viewport.y)/config.gridSize.y), editor.selected.objectType)
+	if x > 200 and x < love.graphics.getWidth()-200 and y > 25 and y < love.graphics.getHeight()-25	then
+		local gridX, gridY = bck.transformToGrid(x-200-editor.viewport.x, y-25-editor.viewport.y)
+		if editor.selected.tool == "select" then
+			local object, area, layer = 0, "", ""
+			if button == 1 then
+				object, area, layer = bck.findObject(x, y, "foreground")
+			elseif button == 2 then
+				object, area, layer = bck.findObject(x, y, "background")
+			end
+			if object ~= nil then
+				editor.selected.area = area
+				editor.selected.object = object
+				editor.selected.layer = layer
+			end
+		elseif editor.selected.tool == "place" then
+			if button == 1 then
+				bck.placeForeground(editor.selected.area, gridX, gridY, editor.selected.objectType)
+			elseif button == 2 then
+				bck.placeBackground(editor.selected.area, gridX, gridY, editor.selected.objectType)
+			end
+		elseif editor.selected.tool == "remove" then
+			
 		end
 	end
 end

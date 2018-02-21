@@ -103,4 +103,42 @@ function bck.placeBackground(area, _x, _y, _type)
 	table.insert(bck.world[area].background, {x = _x, y = _y, type = _type})
 end
 
+function bck.findArea(x, y) --does not handle overlaping areas, although it probably should
+	for i,v in pairs(bck.world) do
+		if checkCollision(x, y, 0.1, 0.1, v.x, v.y, v.sX, v.sY) then
+			return i
+		end
+	end
+end
+
+function bck.findObject(x, y, layer)
+	local area = bck.findArea(x,y)
+	if area ~= nil then
+		if not layer or layer == "foreground" then
+			for i,v in ipairs(bck.world[area].foreground) do
+				if checkCollision(x, y, 0.1, 0.1, v.x+bck.world[area].x, v.y+bck.world[area].y, bck.objects[v.type].sX, bck.objects[type].sY) then
+					return i, area, "foreground"
+				end
+			end
+		end
+		if not layer or layer == "background" then
+			for i,v in ipairs(bck.world[area].background) do
+				if checkCollision(x, y, 0.1, 0.1, v.x+bck.world[area].x, v.y+bck.world[area].y, bck.objects[v.type].sX, bck.objects[type].sY) then
+					return i, area, "background"
+				end
+			end
+		end
+	end
+end
+
+function bck.transformToGrid(x, y)
+	return math.floor(x/config.gridSize.x), math.floor(y/config.gridSize.y)
+end
+
+--QOL Functions (unsure if they will stay here)
+
+function bck.round(num, numDecimalPlaces)
+  return tonumber(string.format("%." .. (numDecimalPlaces or 0) .. "f", num))
+end
+
 return bck
