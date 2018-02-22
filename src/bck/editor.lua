@@ -5,6 +5,7 @@ editor = {} --for editor only settings and variables
 editor.viewport = {x = 0, y = 0, moveSpeed = 500}
 editor.selected = {area = "test", object = 0, layer = "", objectType = "test", tool = "select"}
 editor.view = {areaBoundries = true}
+editor.colorBreathing = {value=0, dir = true, speed = 255}
 
 bck.newArea("test", 0, 0, 50, 50)
 bck.newObject("test", 1, 1, false, false)
@@ -73,6 +74,17 @@ function love.update(dt)
 		bck.update(dt)
 	end
 	frame = bck.drawToCanvas(editor.viewport.x, editor.viewport.y, love.graphics.getWidth()-400, love.graphics.getHeight()-50)
+
+	if editor.colorBreathing.dir then
+		editor.colorBreathing.value = editor.colorBreathing.value + editor.colorBreathing.speed*dt
+	else
+		editor.colorBreathing.value = editor.colorBreathing.value - editor.colorBreathing.speed*dt
+	end
+	if editor.colorBreathing.value >= 255 then
+		editor.colorBreathing.dir = false
+	elseif editor.colorBreathing.value <= 0 then
+		editor.colorBreathing.dir = true
+	end
 end
 
 function love.draw()
@@ -81,13 +93,15 @@ function love.draw()
 	love.graphics.draw(frame, 200, 25)
 	love.graphics.setBlendMode("alpha")
 	if editor.view.areaBoundries then
+		love.graphics.setColor(editor.colorBreathing.value, 0, 0)
 		love.graphics.rectangle("line", editor.viewport.x+(bck.world[editor.selected.area].x*config.gridSize.x), editor.viewport.y+(bck.world[editor.selected.area].y*config.gridSize.y), bck.world[editor.selected.area].sX*config.gridSize.x, bck.world[editor.selected.area].sY*config.gridSize.y)
 	end
+	love.graphics.setColor(0,0,editor.colorBreathing.value)
 	if editor.selected.layer == "foreground" then
-		local x = editor.viewport.x+(bck.world[editor.selected.area].x+bck.world[editor.selected.area].foreground[editor.selected.object].x)*config.gridSize.x
-		local y = editor.viewport.y+(bck.world[editor.selected.area].y+bck.world[editor.selected.area].foreground[editor.selected.object].y)*config.gridSize.y
-		local sX = bck.objects[bck.world[editor.selected.area].foreground[editor.selected.object].type].sX
-		local sY = bck.objects[bck.world[editor.selected.area].foreground[editor.selected.object].type].sY
+		local x = editor.viewport.x+200+(bck.world[editor.selected.area].x+bck.world[editor.selected.area].foreground[editor.selected.object].x)*config.gridSize.x
+		local y = editor.viewport.y+25+(bck.world[editor.selected.area].y+bck.world[editor.selected.area].foreground[editor.selected.object].y)*config.gridSize.y
+		local sX = bck.objects[bck.world[editor.selected.area].foreground[editor.selected.object].type].sX*config.gridSize.x
+		local sY = bck.objects[bck.world[editor.selected.area].foreground[editor.selected.object].type].sY*config.gridSize.y
 		love.graphics.rectangle("line", x, y, sX, sY)
 	elseif editor.selected.layer == "background" then
 
@@ -107,9 +121,9 @@ function love.mousepressed(x, y, button, istouch)
 		if editor.selected.tool == "select" then
 			local object, area, layer = 0, "", ""
 			if button == 1 then
-				object, area, layer = bck.findObject(x, y, "foreground")
+				object, area, layer = bck.findObject(gridX, gridY, "foreground")
 			elseif button == 2 then
-				object, area, layer = bck.findObject(x, y, "background")
+				object, area, layer = bck.findObject(gridX, gridY, "background")
 			end
 			if object ~= nil then
 				editor.selected.area = area
@@ -134,8 +148,4 @@ end
 
 function love.textinput(text)
 	suit.textinput(text)
-end
-
-function round(num, numDecimalPlaces)
-  return tonumber(string.format("%." .. (numDecimalPlaces or 0) .. "f", num))
 end
