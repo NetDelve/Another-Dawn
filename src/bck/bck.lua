@@ -116,14 +116,14 @@ function bck.findObject(x, y, layer)
 	if area ~= nil then
 		if not layer or layer == "foreground" then
 			for i,v in ipairs(bck.world[area].foreground) do
-				if checkCollision(x, y, 0.1, 0.1, v.x+bck.world[area].x, v.y+bck.world[area].y, bck.objects[v.type].sX, bck.objects[type].sY) then
+				if checkCollision(x, y, 0.1, 0.1, v.x+bck.world[area].x, v.y+bck.world[area].y, bck.objects[v.type].sX, bck.objects[v.type].sY) then
 					return i, area, "foreground"
 				end
 			end
 		end
 		if not layer or layer == "background" then
 			for i,v in ipairs(bck.world[area].background) do
-				if checkCollision(x, y, 0.1, 0.1, v.x+bck.world[area].x, v.y+bck.world[area].y, bck.objects[v.type].sX, bck.objects[type].sY) then
+				if checkCollision(x, y, 0.1, 0.1, v.x+bck.world[area].x, v.y+bck.world[area].y, bck.objects[v.type].sX, bck.objects[v.type].sY) then
 					return i, area, "background"
 				end
 			end
