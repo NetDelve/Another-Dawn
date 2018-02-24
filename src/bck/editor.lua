@@ -93,10 +93,14 @@ function love.draw()
 	love.graphics.draw(frame, 200, 25)
 	love.graphics.setBlendMode("alpha")
 	if editor.view.areaBoundries then
-		love.graphics.setColor(editor.colorBreathing.value, 0, 0)
-		love.graphics.rectangle("line", editor.viewport.x+(bck.world[editor.selected.area].x*config.gridSize.x), editor.viewport.y+(bck.world[editor.selected.area].y*config.gridSize.y), bck.world[editor.selected.area].sX*config.gridSize.x, bck.world[editor.selected.area].sY*config.gridSize.y)
+		love.graphics.setColor(255, 0, 0, editor.colorBreathing.value)
+		local x = editor.viewport.x+(bck.world[editor.selected.area].x*config.gridSize.x)+200
+		local y = editor.viewport.y+(bck.world[editor.selected.area].y*config.gridSize.y)+25
+		local sX = bck.world[editor.selected.area].sX*config.gridSize.x
+		local sY = bck.world[editor.selected.area].sY*config.gridSize.y
+		love.graphics.rectangle("line", x, y, sX, sY)
 	end
-	love.graphics.setColor(0,0,editor.colorBreathing.value)
+	love.graphics.setColor(0,0,255, editor.colorBreathing.value)
 	if editor.selected.layer == "foreground" then
 		local x = editor.viewport.x+200+(bck.world[editor.selected.area].x+bck.world[editor.selected.area].foreground[editor.selected.object].x)*config.gridSize.x
 		local y = editor.viewport.y+25+(bck.world[editor.selected.area].y+bck.world[editor.selected.area].foreground[editor.selected.object].y)*config.gridSize.y
@@ -131,13 +135,23 @@ function love.mousepressed(x, y, button, istouch)
 				editor.selected.layer = layer
 			end
 		elseif editor.selected.tool == "place" then
-			if button == 1 then
+			if button == 1 and not bck.findObject(gridX, gridY, "foreground") then
 				bck.placeForeground(editor.selected.area, gridX, gridY, editor.selected.objectType)
-			elseif button == 2 then
+			elseif button == 2 and not bck.findObject(gridX, gridY, "background") then
 				bck.placeBackground(editor.selected.area, gridX, gridY, editor.selected.objectType)
 			end
 		elseif editor.selected.tool == "remove" then
-			
+			if button == 1 then
+				local object, area, layer = bck.findObject(gridX, gridY, "foreground")
+				if object ~= nil then
+					table.remove(bck.world[area].foreground, object)
+				end
+			elseif button == 2 then
+				local object, area, layer = bck.findObject(gridX, gridY, "background")
+				if object ~= nil then
+					table.remove(bck.world[area].background, object)
+				end
+			end
 		end
 	end
 end
