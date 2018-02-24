@@ -4,7 +4,7 @@ config = {gridSize = {x = 50, y = 50}} --TODO make own file
 editor = {} --for editor only settings and variables
 editor.viewport = {x = 0, y = 0, moveSpeed = 500}
 editor.selected = {area = "test", object = 0, layer = "", objectType = "test", tool = "select"}
-editor.view = {areaBoundries = true}
+editor.view = {areaBoundries = true, areaManager = false}
 editor.colorBreathing = {value=0, dir = true, speed = 255}
 
 bck.newArea("test", 0, 0, 50, 50)
@@ -51,11 +51,30 @@ function love.update(dt)
 		end
 	end
 
-	suit.layout:reset(10, 10) --top menu (menu)
+	suit.layout:reset(10, 5) --top menu (menu)
+	if suit.Button("Load", suit.layout:col(60, 15)).hit then
+		
+	end
+	if suit.Button("Save", suit.layout:col()).hit then
+		
+	end
+	if suit.Button("Area Manager", suit.layout:col(100,15)).hit then
+		editor.view.areaManager = true
+	end
+	if suit.Button("Object Manager", suit.layout:col(100,15)).hit then
+		editor.view.objectManager = true
+	end
 
 	suit.layout:reset(10, love.graphics.getHeight()-15) --bottom menu (general info)
 	local x, y = bck.transformToGrid(love.mouse.getX()-200-editor.viewport.x, love.mouse.getY()-25-editor.viewport.y)
 	suit.Label("Mouse: "..x..","..y, {color = {normal={fg={0,0,0}}}, align = "left"}, suit.layout:col(200,10))
+
+	if editor.view.areaManager then --Area Editor
+		suit.layout:reset((love.graphics.getWidth()/2)-250, (love.graphics.getHeight()/2)-150)
+		for i,v in pairs(bck.world) do
+			suit.Label(i.." | ", suit.layout:row(300, 20))
+		end
+	end
 
 	if not suit.hasKeyboardFocus() then --perhaps fix this so wasd can be used
 		if love.keyboard.isDown("up") then
@@ -92,7 +111,7 @@ function love.draw()
 	love.graphics.setBlendMode("alpha", "premultiplied")
 	love.graphics.draw(frame, 200, 25)
 	love.graphics.setBlendMode("alpha")
-	if editor.view.areaBoundries then
+	if editor.view.areaBoundries and bck.world[editor.selected.area] ~= nil then
 		love.graphics.setColor(255, 0, 0, editor.colorBreathing.value)
 		local x = editor.viewport.x+(bck.world[editor.selected.area].x*config.gridSize.x)+200
 		local y = editor.viewport.y+(bck.world[editor.selected.area].y*config.gridSize.y)+25
@@ -100,15 +119,20 @@ function love.draw()
 		local sY = bck.world[editor.selected.area].sY*config.gridSize.y
 		love.graphics.rectangle("line", x, y, sX, sY)
 	end
-	love.graphics.setColor(0,0,255, editor.colorBreathing.value)
 	if editor.selected.layer == "foreground" then
+		love.graphics.setColor(0,255,0, editor.colorBreathing.value)
 		local x = editor.viewport.x+200+(bck.world[editor.selected.area].x+bck.world[editor.selected.area].foreground[editor.selected.object].x)*config.gridSize.x
 		local y = editor.viewport.y+25+(bck.world[editor.selected.area].y+bck.world[editor.selected.area].foreground[editor.selected.object].y)*config.gridSize.y
 		local sX = bck.objects[bck.world[editor.selected.area].foreground[editor.selected.object].type].sX*config.gridSize.x
 		local sY = bck.objects[bck.world[editor.selected.area].foreground[editor.selected.object].type].sY*config.gridSize.y
 		love.graphics.rectangle("line", x, y, sX, sY)
 	elseif editor.selected.layer == "background" then
-
+		love.graphics.setColor(0,0,255, editor.colorBreathing.value)
+		local x = editor.viewport.x+200+(bck.world[editor.selected.area].x+bck.world[editor.selected.area].background[editor.selected.object].x)*config.gridSize.x
+		local y = editor.viewport.y+25+(bck.world[editor.selected.area].y+bck.world[editor.selected.area].background[editor.selected.object].y)*config.gridSize.y
+		local sX = bck.objects[bck.world[editor.selected.area].background[editor.selected.object].type].sX*config.gridSize.x
+		local sY = bck.objects[bck.world[editor.selected.area].background[editor.selected.object].type].sY*config.gridSize.y
+		love.graphics.rectangle("line", x, y, sX, sY)
 	end
 
 	love.graphics.setColor(255,255,255)
