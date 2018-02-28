@@ -27,7 +27,7 @@ local objSearchInput = {text = ""}
 function love.update(dt)
 	suit.layout:reset(10, 35) --left menu (edit object)
 	suit.Input(input, suit.layout:row(180, 30))
-	
+
 	suit.layout:reset(love.graphics.getWidth()-190, 35) --right menu (place object)
 	suit.Label("Mouse Tool", {color = {normal={fg={0,0,0}}}}, suit.layout:row(180, 30))
 	if suit.Button("Select", suit.layout:row(60, 30)).hit then
@@ -58,10 +58,10 @@ function love.update(dt)
 
 	suit.layout:reset(10, 5) --top menu (menu)
 	if suit.Button("Load", suit.layout:col(60, 15)).hit then
-		
+
 	end
 	if suit.Button("Save", suit.layout:col()).hit then
-		
+
 	end
 	if suit.Button("Area Manager", suit.layout:col(100,15)).hit then
 		editor.view.areaManager = true
