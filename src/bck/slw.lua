@@ -1,25 +1,21 @@
-local slw = {}
+local serpent = require 'serpent/serpent'
+slw = {}
 
-function slw.loaddata( filename )
---local tabledata = {}
-slw.file = io.open(filename, "r")
---	for i, v in ipairs tabledata do
-		slw.file:read()
---	end
-slw.file:close()
+function slw.save(table, path)
+	local file = io.open(love.filesystem.getSource().."/"..path, "w")
+	file:write(serpent.block(table))
+	file:close()
 end
 
-function slw.savedata( tabledata , filename )
-	slw.file = io.open( filename , "w" )
-	for i, v in ipairs(tabledata) do
-		local tblstr = v
-		slw.file:write(tblstr)
-		slw.file:write("\n")
-		--if v == "one" then
-		--	slw.file:write( "hit \n" )
-		--end
+function slw.load(path)
+	local file = io.open(love.filesystem.getSource().."/"..path, "r")
+	if not file then
+		return false
+	else
+		local ok, result = serpent.load(file:read("*a"))
+		file:close()
+		return result
 	end
-	slw.file:close()
 end
 
 return slw

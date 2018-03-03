@@ -1,0 +1,8 @@
+{
+  test = {
+    imageFile = false,
+    sX = 1,
+    sY = 1,
+    solid = false
+  } --[[table: 0x407fdb70]]
+} --[[table: 0x407fdb48]]

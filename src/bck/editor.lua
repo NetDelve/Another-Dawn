@@ -1,15 +1,21 @@
-testtable = {"one" , "test" , "beep"}
-slw.savedata( testtable , "test.txt" )
-
 editor = {} --for editor only settings and variables
 editor.viewport = {x = 0, y = 0, moveSpeed = 500}
 editor.selected = {area = "test", object = 0, layer = "", objectType = "test", tool = "select"}
 editor.view = {areaBoundries = true, areaManager = false}
 editor.colorBreathing = {value=0, dir = true, speed = 255}
 
-bck.newArea("test", 0, 0, 50, 50)
-bck.newObject("test", 1, 1, false, false)
-bck.placeForeground("test", 2, 2, "test")
+bck.objects = slw.load("map/objects")
+if not bck.objects then
+	bck.objects = {}
+	bck.newObject("test", 1, 1, false, false)
+end
+
+bck.world = slw.load("map/world")
+if not bck.world then
+	bck.world = {}
+	bck.newArea("test", 0, 0, 50, 50)
+	bck.placeForeground("test", 2, 2, "test")
+end
 
 local HudCan = love.graphics.newCanvas(love.graphics.getWidth(),love.graphics.getHeight()/4)
 local rMenuCan = love.graphics.newCanvas()
@@ -53,10 +59,12 @@ function love.update(dt)
 
 	suit.layout:reset(10, 5) --top menu (menu)
 	if suit.Button("Load", suit.layout:col(60, 15)).hit then
-
+		bck.objects = slw.load("map/objects")
+		bck.world = slw.load("map/world")
 	end
 	if suit.Button("Save", suit.layout:col()).hit then
-
+		slw.save(bck.objects, "map/objects")
+		slw.save(bck.world, "map/world")
 	end
 	if suit.Button("Area Manager", suit.layout:col(100,15)).hit then
 		editor.view.areaManager = true
