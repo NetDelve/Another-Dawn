@@ -11,7 +11,7 @@ end
 
 function slw.savedata( tabledata , filename )
 	slw.file = io.open( filename , "w" )
-	for i, v in ipairs tabledata do
+	for i, v in ipairs(tabledata) do
 		local tblstr = v
 		slw.file:write(tblstr)
 		slw.file:write("\n")
