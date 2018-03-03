@@ -1,3 +1,6 @@
+config = {} --global config
+config.gridSize = {x = 50, y = 50}
+
 function love.conf(t)
     t.identity = "another-dawn"                  -- The name of the save directory (string)
     t.version = "0.10.1"                -- The LÖVE version this game was made for (string)

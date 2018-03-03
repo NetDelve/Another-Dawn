@@ -1,11 +1,6 @@
-suit = require 'suit'
-
-slw = require 'slw'
 testtable = {"one" , "test" , "beep"}
 slw.savedata( testtable , "test.txt" )
 
-
-config = {gridSize = {x = 50, y = 50}} --TODO make own file
 editor = {} --for editor only settings and variables
 editor.viewport = {x = 0, y = 0, moveSpeed = 500}
 editor.selected = {area = "test", object = 0, layer = "", objectType = "test", tool = "select"}
@@ -111,6 +106,7 @@ function love.update(dt)
 	end
 end
 
+frame = love.graphics.newCanvas(1,1) --hack for menu
 function love.draw()
 	love.graphics.setColor(255,255,255,255)
 	love.graphics.setBlendMode("alpha", "premultiplied")
@@ -183,12 +179,4 @@ function love.mousepressed(x, y, button, istouch)
 			end
 		end
 	end
-end
-
-function love.keypressed(key, scancode, isrepeat)
-	suit.keypressed(key)
-end
-
-function love.textinput(text)
-	suit.textinput(text)
 end
