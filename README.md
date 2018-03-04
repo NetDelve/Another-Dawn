@@ -1,32 +1,28 @@
 # Another-Dawn
 	by NetDelve
-	Version 0.0.1
 
-An openworld space adventure RPG done in Lua with Love2D inspired by Fallout 1&2 
+An open world Adventure/RPG game heavily inspiered by Fallout
 
-To-Do list:
+Written in Lua using Love2D
 
-*Fixing Map/World System*
+##To-Do list:
 	
-## Game
-1. Game loop (This wil make pasue and shop menus easier)
-2. fast travel galaga mini game?
+### Game
+1. fast travel galaga mini game?
 	
-## Menus
+### Menus
 1. Game Logo
 2. pause menu
 3. load menu
 4. shop menu
 5. pretty buttons
 	
-## Editor
-1. Map Import/Export
-2. Search Menu
-3. area creation
-4. texture placement
-5. travelmap editor
+### Editor
+1. area manager
+2. object type manager
+3. travelmap editor
 
-## Graphics
+### Graphics
 1. Game logo
 2. load bar
 3. more textures
