@@ -5,6 +5,10 @@ An open world Adventure/RPG game heavily inspiered by Fallout
 
 Written in Lua using Love2D
 
+## Description
+
+The world is in a state of neculear winter as the result of WW3. It's the player's main role to find a way to clear the skys and let the sun shine again.
+
 ## To-Do list:
 	
 ### Game
