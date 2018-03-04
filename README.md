@@ -5,7 +5,7 @@ An open world Adventure/RPG game heavily inspiered by Fallout
 
 Written in Lua using Love2D
 
-##To-Do list:
+## To-Do list:
 	
 ### Game
 1. fast travel galaga mini game?
