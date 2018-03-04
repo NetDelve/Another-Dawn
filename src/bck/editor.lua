@@ -27,7 +27,18 @@ local input = {text = ""}
 local objSearchInput = {text = ""}
 function love.update(dt)
 	suit.layout:reset(10, 35) --left menu (edit object)
-	suit.Input(input, suit.layout:row(180, 30))
+	if editor.selected.layer == "foreground" then
+		for i,v in pairs(bck.world[editor.selected.area].foreground[editor.selected.object]) do
+			suit.Label(tostring(i), {color = {normal={fg={0,0,0}}}}, suit.layout:row(180, 20))
+			suit.Label(tostring(v), {color = {normal={fg={0,0,0}}}}, suit.layout:row())
+			suit.layout:row()
+			--[[if type(v) == "boolean" then
+				if suit.Button(tostring(v)
+			end]]
+		end
+	elseif editor.selected.layer == "background" then
+
+	end
 
 	suit.layout:reset(love.graphics.getWidth()-190, 35) --right menu (place object)
 	suit.Label("Mouse Tool", {color = {normal={fg={0,0,0}}}}, suit.layout:row(180, 30))
@@ -167,13 +178,13 @@ function love.mousepressed(x, y, button, istouch)
 				editor.selected.object = object
 				editor.selected.layer = layer
 			end
-		elseif editor.selected.tool == "place" then
+		elseif editor.selected.tool == "place" then --TODO select newly placed object
 			if button == 1 and not bck.findObject(gridX, gridY, "foreground") then
 				bck.placeForeground(editor.selected.area, gridX, gridY, editor.selected.objectType)
 			elseif button == 2 and not bck.findObject(gridX, gridY, "background") then
 				bck.placeBackground(editor.selected.area, gridX, gridY, editor.selected.objectType)
 			end
-		elseif editor.selected.tool == "remove" then
+		elseif editor.selected.tool == "remove" then --TODO unselect object
 			if button == 1 then
 				local object, area, layer = bck.findObject(gridX, gridY, "foreground")
 				if object ~= nil then
