@@ -13,18 +13,6 @@ function bck.loadWorld(file)
 	end
 end
 
-function bck.update(dt) --TODO multithread object scripts
-	for i,area in pairs(bck.world) do
-		for o,object in ipairs(area.foreground) do
-			if bck.objects[object.type].script ~= nil then
-				if not pcall(bck.objects[object.type].script(i,o)) then --run object script with error protection, i and o are to tell the script what object to run on
-					--error
-				end
-			end
-		end
-	end
-end
-
 local function checkCollision(x1,y1,w1,h1, x2,y2,w2,h2)
   return x1 < x2+w2 and
          x2 < x1+w1 and
@@ -83,6 +71,28 @@ function bck.drawToCanvas(camX, camY, sX, sY) --Viewport camera/offset, viewport
 		bck.drawForeground(camX, camY, sX, sY)
 	love.graphics.setCanvas()
 	return canvas
+end
+
+--Scripts/Processing
+
+function bck.updateCollisionMap() --TODO
+
+end
+
+function bck.updatePositions(dt) --TODO for objects that are pushed
+
+end
+
+function bck.updateScripts(dt) --TODO multithread object scripts
+	for i,area in pairs(bck.world) do
+		for o,object in ipairs(area.foreground) do
+			if bck.objects[object.type].script ~= nil then
+				if not pcall(bck.objects[object.type].script(i,o)) then --run object script with error protection, i and o are to tell the script what object to run on
+					--error
+				end
+			end
+		end
+	end
 end
 
 --Editor/Debug

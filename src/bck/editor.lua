@@ -108,9 +108,6 @@ function love.update(dt)
 		end
 	end
 
-	if enableScripts then --TODO menu toggle
-		bck.update(dt)
-	end
 	frame = bck.drawToCanvas(editor.viewport.x, editor.viewport.y, love.graphics.getWidth()-400, love.graphics.getHeight()-50)
 
 	if editor.colorBreathing.dir then
