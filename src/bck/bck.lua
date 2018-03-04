@@ -2,7 +2,7 @@ bck = {}
 bck.objects = {} --contains object definitions
 bck.world = {} --contains area tables that contain objects
 
---Normal Game Stuff
+--Standard Functions
 
 function bck.loadWorld(file)
 	bck.objects, bck.world = require(file)
@@ -85,7 +85,7 @@ function bck.drawToCanvas(camX, camY, sX, sY) --Viewport camera/offset, viewport
 	return canvas
 end
 
---Editor Stuff
+--Editor/Debug
 
 function bck.newObject(type, _sX, _sY, _solid, _imageFile, _script)
 	bck.objects[type] = {sX = _sX, sY = _sY, solid = _solid, imageFile = _imageFile, script = _script}
@@ -97,10 +97,12 @@ end
 
 function bck.placeForeground(area, _x, _y, _type)
 	table.insert(bck.world[area].foreground, {x = _x, y = _y, type = _type})
+	return table.maxn(bck.world[area].foreground)
 end
 
 function bck.placeBackground(area, _x, _y, _type)
 	table.insert(bck.world[area].background, {x = _x, y = _y, type = _type})
+	return table.maxn(bck.world[area].background)
 end
 
 function bck.findArea(x, y) --does not handle overlaping areas, although it probably should

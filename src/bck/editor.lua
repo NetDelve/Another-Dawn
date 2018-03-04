@@ -164,7 +164,7 @@ function love.draw()
 end
 
 function love.mousepressed(x, y, button, istouch)
-	if x > 200 and x < love.graphics.getWidth()-200 and y > 25 and y < love.graphics.getHeight()-25	then
+	if x > 200 and x < love.graphics.getWidth()-200 and y > 25 and y < love.graphics.getHeight()-25	then --check if mouse is in viewport
 		local gridX, gridY = bck.transformToGrid(x-200-editor.viewport.x, y-25-editor.viewport.y)
 		if editor.selected.tool == "select" then
 			local object, area, layer = 0, "", ""
@@ -178,22 +178,26 @@ function love.mousepressed(x, y, button, istouch)
 				editor.selected.object = object
 				editor.selected.layer = layer
 			end
-		elseif editor.selected.tool == "place" then --TODO select newly placed object
+		elseif editor.selected.tool == "place" then
 			if button == 1 and not bck.findObject(gridX, gridY, "foreground") then
-				bck.placeForeground(editor.selected.area, gridX, gridY, editor.selected.objectType)
+				editor.selected.layer = "foreground"
+				editor.selected.object = bck.placeForeground(editor.selected.area, gridX, gridY, editor.selected.objectType)
 			elseif button == 2 and not bck.findObject(gridX, gridY, "background") then
-				bck.placeBackground(editor.selected.area, gridX, gridY, editor.selected.objectType)
+				editor.selected.layer = "background"
+				editor.selected.object = bck.placeBackground(editor.selected.area, gridX, gridY, editor.selected.objectType)
 			end
-		elseif editor.selected.tool == "remove" then --TODO unselect object
+		elseif editor.selected.tool == "remove" then
 			if button == 1 then
 				local object, area, layer = bck.findObject(gridX, gridY, "foreground")
 				if object ~= nil then
 					table.remove(bck.world[area].foreground, object)
+					editor.selected.layer = false
 				end
 			elseif button == 2 then
 				local object, area, layer = bck.findObject(gridX, gridY, "background")
 				if object ~= nil then
 					table.remove(bck.world[area].background, object)
+					editor.selected.layer = false
 				end
 			end
 		end
