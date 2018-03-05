@@ -2,16 +2,17 @@ bck = {}
 bck.objects = {} --contains object definitions
 bck.world = {} --contains area tables that contain objects
 
---Standard Functions
+--Init
 
-function bck.loadWorld(file)
-	bck.objects, bck.world = require(file)
-	for i,v in ipairs(bck.objects) do
+function bck.loadImages() --TODO merge SLW?
+	for i,v in pairs(bck.objects) do
 		if v.imageFile ~= false and v.imageFile ~= nil then
 			v.image = love.graphics.newImage(v.imageFile) --load all object images
 		end
 	end
 end
+
+--Standard Functions
 
 local function checkCollision(x1,y1,w1,h1, x2,y2,w2,h2)
   return x1 < x2+w2 and
@@ -31,10 +32,10 @@ function bck.drawForeground(camX, camY, sX, sY)
 			for i,object in ipairs(area.foreground) do
 				local objRealX = object.x*config.gridSize.x
 				local objRealY = object.y*config.gridSize.y
-				if bck.objects[object.type].image ~= nil then
-					love.graphics.draw(bck.objects[object.type].image, camX+(objRealX+areaRealX), camY+(objRealY+areaRealY))
-				else
+				if not bck.objects[object.type].image then
 					love.graphics.rectangle("fill", camX+(objRealX+areaRealX), camY+(objRealY+areaRealY), bck.objects[object.type].sX*config.gridSize.x, bck.objects[object.type].sY*config.gridSize.y)	--missing image, draw some error thing
+				else
+					love.graphics.draw(bck.objects[object.type].image, camX+(objRealX+areaRealX), camY+(objRealY+areaRealY))
 				end
 			end
 		end
@@ -52,10 +53,10 @@ function bck.drawBackground(camX, camY, sX, sY)
 			for i,object in ipairs(area.background) do
 				local objRealX = object.x*config.gridSize.x
 				local objRealY = object.y*config.gridSize.y
-				if bck.objects[object.type].image ~= nil then
-					love.graphics.draw(bck.objects[object.type].image, camX+(objRealX+areaRealX), camY+(objRealY+areaRealY))
-				else
+				if not bck.objects[object.type].image then
 					love.graphics.rectangle("fill", camX+(objRealX+areaRealX), camY+(objRealY+areaRealY), bck.objects[object.type].sX*config.gridSize.x, bck.objects[object.type].sY*config.gridSize.y)	--missing image, draw some error thing
+				else
+					love.graphics.draw(bck.objects[object.type].image, camX+(objRealX+areaRealX), camY+(objRealY+areaRealY))
 				end
 			end
 		end
@@ -73,7 +74,7 @@ function bck.drawToCanvas(camX, camY, sX, sY) --Viewport camera/offset, viewport
 	return canvas
 end
 
---Scripts/Processing
+--Processing
 
 function bck.updateCollisionMap() --TODO
 
@@ -87,8 +88,11 @@ function bck.updateScripts(dt) --TODO multithread object scripts
 	for i,area in pairs(bck.world) do
 		for o,object in ipairs(area.foreground) do
 			if bck.objects[object.type].script ~= nil then
-				if not pcall(bck.objects[object.type].script(i,o)) then --run object script with error protection, i and o are to tell the script what object to run on
-					--error
+				local status, returnedObject = pcall(bck.objects[object.type].script(object)) --run object script with error protection
+				if not status then 
+					error(returnedObject) --TODO just log it, disable the script for that object and carry on
+				else
+					object = returnedObject
 				end
 			end
 		end

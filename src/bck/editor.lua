@@ -1,21 +1,15 @@
 editor = {} --for editor only settings and variables
 editor.viewport = {x = 0, y = 0, moveSpeed = 500}
-editor.selected = {area = "test", object = 0, layer = "", objectType = "test", tool = "select"}
+editor.selected = {area = "test", object = 0, layer = "", objectType = "ground_dirt", tool = "select"}
 editor.view = {areaBoundries = true, areaManager = false}
 editor.colorBreathing = {value=0, dir = true, speed = 255}
 
-bck.objects = slw.load("map/objects")
-if not bck.objects then
-	bck.objects = {}
-	bck.newObject("test", 1, 1, false, false)
-end
+ok, bck.objects = slw.load("map/objects")
+if not ok then error("Bad Object File: "..bck.objects) end
+ok, bck.world = slw.load("map/world")
+if not ok then error("Bad World File: "..bck.world) end
 
-bck.world = slw.load("map/world")
-if not bck.world then
-	bck.world = {}
-	bck.newArea("test", 0, 0, 50, 50)
-	bck.placeForeground("test", 2, 2, "test")
-end
+bck.loadImages()
 
 local HudCan = love.graphics.newCanvas(love.graphics.getWidth(),love.graphics.getHeight()/4)
 local rMenuCan = love.graphics.newCanvas()
@@ -52,14 +46,14 @@ function love.update(dt)
 		editor.selected.tool = "remove"
 	end
 	suit.layout:reset(love.graphics.getWidth()-190, 100)
-	suit.Input(objSearchInput, suit.layout:row(180, 30))
+	suit.Input(objSearchInput, suit.layout:row(180, 50))
 	for i,v in pairs(bck.objects) do
 		if string.find(i, objSearchInput.text) ~= nil then
 			local hit = false
-			if type(v.image) == "imagedata" then
+			if type(v.image) == "userdata" then
 				if suit.ImageButton(v.image, suit.layout:row()).hit then hit = true end
 			else
-				if suit.Button("No Image", suit.layout:row()).hit then hit = true end
+				if suit.Button(i, suit.layout:row()).hit then hit = true end
 			end
 			suit.Label(tostring(i), {color = {normal={fg={0,0,0}}}}, suit.layout:row())
 			if hit then

@@ -14,7 +14,7 @@ function slw.load(path)
 	else
 		local ok, result = serpent.load(file:read("*a"))
 		file:close()
-		return result
+		return ok, result
 	end
 end
 

@@ -1,21 +1,21 @@
 {
   test = {
-    background = {} --[[table: 0x407ec110]],
+    background = {} --[[table: 0x40886bc0]],
     foreground = {
       {
         type = "test",
         x = 2,
         y = 2
-      } --[[table: 0x407ec138]],
+      } --[[table: 0x40886be8]],
       {
         type = "test",
         x = 5,
         y = 2
-      } --[[table: 0x407ec160]]
-    } --[[table: 0x407ef398]],
+      } --[[table: 0x40886c10]]
+    } --[[table: 0x40886520]],
     sX = 50,
     sY = 50,
     x = 0,
     y = 0
-  } --[[table: 0x407ec0e8]]
-} --[[table: 0x407ef348]]
+  } --[[table: 0x40886ad0]]
+} --[[table: 0x40a344e0]]

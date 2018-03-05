@@ -4,7 +4,7 @@ config.controls.up = "w"
 config.controls.down = "s"
 config.controls.left = "a"
 config.controls.right = "d"
-config.gridSize = {x = 50, y = 50} --Size for single grid unit
+config.gridSize = {x = 64, y = 64} --Size for single grid unit
 
 function love.conf(t)
     t.identity = "another-dawn"                  -- The name of the save directory (string)
