@@ -1,5 +1,5 @@
 local serpent = require 'serpent/serpent'
-slw = {}
+slw = {} --TODO merge with bck?
 
 function slw.save(table, path)
 	local file = io.open(love.filesystem.getSource().."/"..path, "w")

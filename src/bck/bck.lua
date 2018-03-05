@@ -4,7 +4,7 @@ bck.world = {} --contains area tables that contain objects
 
 --Init
 
-function bck.loadImages() --TODO merge SLW?
+function bck.loadImages() --TODO load images for active areas only
 	for i,v in pairs(bck.objects) do
 		if v.imageFile ~= false and v.imageFile ~= nil then
 			v.image = love.graphics.newImage(v.imageFile) --load all object images
@@ -84,7 +84,7 @@ function bck.updatePositions(dt) --TODO for objects that are pushed
 
 end
 
-function bck.updateScripts(dt) --TODO multithread object scripts
+function bck.updateScripts(dt) --TODO multithread object scripts?
 	for i,area in pairs(bck.world) do
 		for o,object in ipairs(area.foreground) do
 			if bck.objects[object.type].script ~= nil then

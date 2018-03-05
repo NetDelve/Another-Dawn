@@ -1,14 +1,15 @@
 {
   ground_dirt = {
+    image = "Image: 0x021d53e0",
     imageFile = "img/snow-yd/dirt.png",
     sX = 1,
     sY = 1,
     solid = false
-  } --[[table: 0x40884d58]],
+  } --[[table: 0x40a86b58]],
   test = {
     imageFile = false,
     sX = 1,
     sY = 1,
     solid = false
-  } --[[table: 0x41137b80]]
-} --[[table: 0x411404b8]]
+  } --[[table: 0x40a86be8]]
+} --[[table: 0x40a865a8]]

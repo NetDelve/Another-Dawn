@@ -11,8 +11,11 @@ function love.update(dt)
 	if suit.Button("Game", suit.layout:row(200, 50)).hit then
 		require 'game'
 	end
-	if true then--suit.Button("Editor", suit.layout:row()).hit then
+	if suit.Button("Map Editor", suit.layout:row()).hit then
 		require 'editor'
+	end
+	if suit.Button("Object Editor", suit.layout:row()).hit then
+		require 'objecteditor'
 	end
 end
 

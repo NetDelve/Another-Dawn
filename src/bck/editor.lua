@@ -11,7 +11,7 @@ if not ok then error("Bad World File: "..bck.world) end
 
 bck.loadImages()
 
-local HudCan = love.graphics.newCanvas(love.graphics.getWidth(),love.graphics.getHeight()/4)
+local HudCan = love.graphics.newCanvas(love.graphics.getWidth(),love.graphics.getHeight()/4) --why is this here
 local rMenuCan = love.graphics.newCanvas()
 local lMenuCan = love.graphics.newCanvas()
 local popupMenuCan = love.graphics.newCanvas()
@@ -65,8 +65,11 @@ function love.update(dt)
 
 	suit.layout:reset(10, 5) --top menu (menu)
 	if suit.Button("Load", suit.layout:col(60, 15)).hit then
-		bck.objects = slw.load("map/objects")
-		bck.world = slw.load("map/world")
+		ok, bck.objects = slw.load("map/objects")
+		if not ok then error("Bad Object File: "..bck.objects) end
+		ok, bck.world = slw.load("map/world")
+		if not ok then error("Bad World File: "..bck.world) end
+		bck.loadImages()
 	end
 	if suit.Button("Save", suit.layout:col()).hit then
 		slw.save(bck.objects, "map/objects")
@@ -81,22 +84,19 @@ function love.update(dt)
 		end
 	end
 	suit.Label(" | ", suit.layout:col(25,15))
-	if suit.Button("Object Manager", suit.layout:col(100,15)).hit then
-		editor.view.objectManager = true
-	end
 
 	suit.layout:reset(10, love.graphics.getHeight()-15) --bottom menu (general info)
 	local x, y = bck.transformToGrid(love.mouse.getX()-200-editor.viewport.x, love.mouse.getY()-25-editor.viewport.y)
 	local areaUnderMouse = bck.findArea(x,y)
 	local areaX, areaY = "NA", "NA"
-	if not areaUnderMouse then 
+	if not areaUnderMouse then
 		areaUnderMouse = "None"
 	else
 		areaX, areaY = x-bck.world[areaUnderMouse].x, y-bck.world[areaUnderMouse].y
 	end
 	suit.Label("Under Mouse: Global: "..x..","..y.." Area("..areaUnderMouse.."): "..areaX..","..areaY, {color = {normal={fg={0,0,0}}}, align = "left"}, suit.layout:col(400,10))
 
-	if not suit.hasKeyboardFocus() then --perhaps fix this so wasd can be used
+	if not suit.hasKeyboardFocus() then --TODO perhaps fix this so wasd can be used
 		if love.keyboard.isDown("up") then
 			editor.viewport.y = editor.viewport.y + editor.viewport.moveSpeed*dt
 		elseif love.keyboard.isDown("down") then
