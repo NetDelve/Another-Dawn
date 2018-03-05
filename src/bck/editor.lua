@@ -1,7 +1,7 @@
 editor = {} --for editor only settings and variables
 editor.viewport = {x = 0, y = 0, moveSpeed = 500}
 editor.selected = {area = "test", object = 0, layer = "", objectType = "ground_dirt", tool = "select"}
-editor.view = {areaBoundries = true, areaManager = false}
+editor.view = {areaBoundries = true}
 editor.colorBreathing = {value=0, dir = true, speed = 255}
 
 ok, bck.objects = slw.load("map/objects")
@@ -26,12 +26,13 @@ function love.update(dt)
 			suit.Label(tostring(i), {color = {normal={fg={0,0,0}}}}, suit.layout:row(180, 20))
 			suit.Label(tostring(v), {color = {normal={fg={0,0,0}}}}, suit.layout:row())
 			suit.layout:row()
-			--[[if type(v) == "boolean" then
-				if suit.Button(tostring(v)
-			end]]
 		end
 	elseif editor.selected.layer == "background" then
-
+		for i,v in pairs(bck.world[editor.selected.area].background[editor.selected.object]) do
+			suit.Label(tostring(i), {color = {normal={fg={0,0,0}}}}, suit.layout:row(180, 20))
+			suit.Label(tostring(v), {color = {normal={fg={0,0,0}}}}, suit.layout:row())
+			suit.layout:row()
+		end
 	end
 
 	suit.layout:reset(love.graphics.getWidth()-190, 35) --right menu (place object)
@@ -57,7 +58,7 @@ function love.update(dt)
 			end
 			suit.Label(tostring(i), {color = {normal={fg={0,0,0}}}}, suit.layout:row())
 			if hit then
-				objectType = i
+				editor.selected.objectType = i
 			end
 		end
 	end
@@ -71,23 +72,29 @@ function love.update(dt)
 		slw.save(bck.objects, "map/objects")
 		slw.save(bck.world, "map/world")
 	end
-	if suit.Button("Area Manager", suit.layout:col(100,15)).hit then
-		editor.view.areaManager = true
+	suit.Label(" | ", suit.layout:col(25,15))
+	if suit.Button("Area Boundries", suit.layout:col(100,15)).hit then
+		if editor.view.areaBoundries then
+			editor.view.areaBoundries = false
+		else
+			editor.view.areaBoundries = true
+		end
 	end
+	suit.Label(" | ", suit.layout:col(25,15))
 	if suit.Button("Object Manager", suit.layout:col(100,15)).hit then
 		editor.view.objectManager = true
 	end
 
 	suit.layout:reset(10, love.graphics.getHeight()-15) --bottom menu (general info)
 	local x, y = bck.transformToGrid(love.mouse.getX()-200-editor.viewport.x, love.mouse.getY()-25-editor.viewport.y)
-	suit.Label("Mouse: "..x..","..y, {color = {normal={fg={0,0,0}}}, align = "left"}, suit.layout:col(200,10))
-
-	if editor.view.areaManager then --Area Editor
-		suit.layout:reset((love.graphics.getWidth()/2)-250, (love.graphics.getHeight()/2)-150)
-		for i,v in pairs(bck.world) do
-			suit.Label(i.." | ", suit.layout:row(300, 20))
-		end
+	local areaUnderMouse = bck.findArea(x,y)
+	local areaX, areaY = "NA", "NA"
+	if not areaUnderMouse then 
+		areaUnderMouse = "None"
+	else
+		areaX, areaY = x-bck.world[areaUnderMouse].x, y-bck.world[areaUnderMouse].y
 	end
+	suit.Label("Under Mouse: Global: "..x..","..y.." Area("..areaUnderMouse.."): "..areaX..","..areaY, {color = {normal={fg={0,0,0}}}, align = "left"}, suit.layout:col(400,10))
 
 	if not suit.hasKeyboardFocus() then --perhaps fix this so wasd can be used
 		if love.keyboard.isDown("up") then
