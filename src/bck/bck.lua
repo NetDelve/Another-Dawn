@@ -21,7 +21,7 @@ local function checkCollision(x1,y1,w1,h1, x2,y2,w2,h2)
          y2 < y1+h1
 end
 
-function bck.drawForeground(camX, camY, sX, sY)
+function bck.drawForeground(camX, camY, sX, sY) --TODO negative values might not work correctly
 	love.graphics.setColor(255,255,255,255)
 	for i,area in pairs(bck.world) do
 		local areaRealX = area.x*config.gridSize.x

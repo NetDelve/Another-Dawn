@@ -1,15 +1,142 @@
 {
   ground_dirt = {
-    image = "Image: 0x021d53e0",
+    image = "Image: 0x010e6020",
     imageFile = "img/snow-yd/dirt.png",
     sX = 1,
     sY = 1,
     solid = false
-  } --[[table: 0x40a86b58]],
-  test = {
-    imageFile = false,
+  } --[[table: 0x41838d00]],
+  ["ground_dirt_snow-1"] = {
+    image = "Image: 0x01096260",
+    imageFile = "img/snow-yd/dirt_snow-1.png",
     sX = 1,
     sY = 1,
     solid = false
-  } --[[table: 0x40a86be8]]
-} --[[table: 0x40a865a8]]
+  } --[[table: 0x4029c678]],
+  ["ground_dirt_snow-2"] = {
+    image = "Image: 0x00ed2fe0",
+    imageFile = "img/snow-yd/dirt_snow-2.png",
+    sX = 1,
+    sY = 1,
+    solid = false
+  } --[[table: 0x4029c768]],
+  ["ground_dirt_snow-3"] = {
+    image = "Image: 0x010b7750",
+    imageFile = "img/snow-yd/dirt_snow-3.png",
+    sX = 1,
+    sY = 1,
+    solid = false
+  } --[[table: 0x4029c790]],
+  ["ground_dirt_snow-4"] = {
+    image = "Image: 0x00e902c0",
+    imageFile = "img/snow-yd/dirt_snow-4.png",
+    sX = 1,
+    sY = 1,
+    solid = false
+  } --[[table: 0x409be7a8]],
+  ["ground_dirt_snow-5"] = {
+    image = "Image: 0x010a7950",
+    imageFile = "img/snow-yd/dirt_snow-5.png",
+    sX = 1,
+    sY = 1,
+    solid = false
+  } --[[table: 0x409be898]],
+  ["ground_dirt_snow-6"] = {
+    image = "Image: 0x0108c320",
+    imageFile = "img/snow-yd/dirt_snow-6.png",
+    sX = 1,
+    sY = 1,
+    solid = false
+  } --[[table: 0x409be8c0]],
+  ["ground_dirt_snow-7"] = {
+    image = "Image: 0x010e7160",
+    imageFile = "img/snow-yd/dirt_snow-7.png",
+    sX = 1,
+    sY = 1,
+    solid = false
+  } --[[table: 0x409bed80]],
+  ["ground_dirt_snow-8"] = {
+    image = "Image: 0x010bc740",
+    imageFile = "img/snow-yd/dirt_snow-8.png",
+    sX = 1,
+    sY = 1,
+    solid = false
+  } --[[table: 0x4029c480]],
+  ["ground_dirt_snow-9"] = {
+    image = "Image: 0x00ed2d80",
+    imageFile = "img/snow-yd/dirt_snow-9.png",
+    sX = 1,
+    sY = 1,
+    solid = false
+  } --[[table: 0x4051e200]],
+  ["ground_dirt_snow-10"] = {
+    image = "Image: 0x0108d600",
+    imageFile = "img/snow-yd/dirt_snow-10.png",
+    sX = 1,
+    sY = 1,
+    solid = false
+  } --[[table: 0x4051e2f0]],
+  ["ground_dirt_snow-11"] = {
+    image = "Image: 0x010b85b0",
+    imageFile = "img/snow-yd/dirt_snow-11.png",
+    sX = 1,
+    sY = 1,
+    solid = false
+  } --[[table: 0x4051e3e0]],
+  ["ground_dirt_snow-12"] = {
+    image = "Image: 0x010e6e60",
+    imageFile = "img/snow-yd/dirt_snow-12.png",
+    sX = 1,
+    sY = 1,
+    solid = false
+  } --[[table: 0x4051e4d0]],
+  ["ground_dirt_snow-13"] = {
+    image = "Image: 0x010e75f0",
+    imageFile = "img/snow-yd/dirt_snow-13.png",
+    sX = 1,
+    sY = 1,
+    solid = false
+  } --[[table: 0x4051e5c0]],
+  ["ground_dirt_snow-14"] = {
+    image = "Image: 0x01095380",
+    imageFile = "img/snow-yd/dirt_snow-14.png",
+    sX = 1,
+    sY = 1,
+    solid = false
+  } --[[table: 0x4051e6b0]],
+  ["ground_dirt_snow-15"] = {
+    image = "Image: 0x010f6c50",
+    imageFile = "img/snow-yd/dirt_snow-15.png",
+    sX = 1,
+    sY = 1,
+    solid = false
+  } --[[table: 0x4051e7a0]],
+  ["ground_dirt_snow-16"] = {
+    image = "Image: 0x00ed2c20",
+    imageFile = "img/snow-yd/dirt_snow-16.png",
+    sX = 1,
+    sY = 1,
+    solid = false
+  } --[[table: 0x4051e890]],
+  ["ground_dirt_snow-17"] = {
+    image = "Image: 0x00ed2ac0",
+    imageFile = "img/snow-yd/dirt_snow-17.png",
+    sX = 1,
+    sY = 1,
+    solid = false
+  } --[[table: 0x4051e980]],
+  ["ground_dirt_snow-18"] = {
+    image = "Image: 0x010a6ac0",
+    imageFile = "img/snow-yd/dirt_snow-18.png",
+    sX = 1,
+    sY = 1,
+    solid = false
+  } --[[table: 0x4051ea70]],
+  ground_snow = {
+    image = "Image: 0x010ad760",
+    imageFile = "img/snow-yd/snow.png",
+    sX = 1,
+    sY = 1,
+    solid = false
+  } --[[table: 0x4051eb60]]
+} --[[table: 0x4052e088]]

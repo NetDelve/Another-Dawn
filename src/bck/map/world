@@ -1,21 +1,561 @@
 {
   test = {
-    background = {} --[[table: 0x40a867d0]],
-    foreground = {
+    background = {
       {
-        type = "test",
+        type = "ground_snow",
+        x = 0,
+        y = 0
+      } --[[table: 0x409c9fe0]],
+      {
+        type = "ground_snow",
+        x = 0,
+        y = 1
+      } --[[table: 0x409ca008]],
+      {
+        type = "ground_snow",
+        x = 0,
+        y = 2
+      } --[[table: 0x409ca098]],
+      {
+        type = "ground_snow",
+        x = 1,
+        y = 0
+      } --[[table: 0x409ca128]],
+      {
+        type = "ground_snow",
+        x = 1,
+        y = 1
+      } --[[table: 0x40de8c40]],
+      {
+        type = "ground_snow",
+        x = 1,
+        y = 2
+      } --[[table: 0x40de8c68]],
+      {
+        type = "ground_snow",
+        x = 0,
+        y = 3
+      } --[[table: 0x40529728]],
+      {
+        type = "ground_snow",
+        x = 0,
+        y = 4
+      } --[[table: 0x405297b8]],
+      {
+        type = "ground_snow",
+        x = 1,
+        y = 3
+      } --[[table: 0x40529848]],
+      {
+        type = "ground_snow",
+        x = 1,
+        y = 4
+      } --[[table: 0x405298d8]],
+      {
+        type = "ground_snow",
+        x = 2,
+        y = 0
+      } --[[table: 0x40529968]],
+      {
+        type = "ground_snow",
+        x = 2,
+        y = 1
+      } --[[table: 0x405299f8]],
+      {
+        type = "ground_snow",
         x = 2,
         y = 2
-      } --[[table: 0x40a874e0]],
+      } --[[table: 0x40529a88]],
       {
-        type = "test",
+        type = "ground_snow",
+        x = 2,
+        y = 3
+      } --[[table: 0x40529b18]],
+      {
+        type = "ground_snow",
+        x = 2,
+        y = 4
+      } --[[table: 0x40529ba8]],
+      {
+        type = "ground_snow",
+        x = 3,
+        y = 0
+      } --[[table: 0x40529c38]],
+      {
+        type = "ground_snow",
+        x = 3,
+        y = 1
+      } --[[table: 0x40529cc8]],
+      {
+        type = "ground_snow",
+        x = 4,
+        y = 0
+      } --[[table: 0x40df6458]],
+      {
+        type = "ground_snow",
+        x = 4,
+        y = 1
+      } --[[table: 0x40df64e8]],
+      {
+        type = "ground_snow",
+        x = 0,
+        y = 5
+      } --[[table: 0x40df6698]],
+      {
+        type = "ground_snow",
+        x = 0,
+        y = 6
+      } --[[table: 0x40df6728]],
+      {
+        type = "ground_snow",
+        x = 0,
+        y = 7
+      } --[[table: 0x40df67b8]],
+      {
+        type = "ground_snow",
+        x = 0,
+        y = 8
+      } --[[table: 0x40df6848]],
+      {
+        type = "ground_snow",
+        x = 0,
+        y = 9
+      } --[[table: 0x40df68d8]],
+      {
+        type = "ground_snow",
+        x = 1,
+        y = 5
+      } --[[table: 0x40df6968]],
+      {
+        type = "ground_snow",
+        x = 1,
+        y = 6
+      } --[[table: 0x40df69f8]],
+      {
+        type = "ground_snow",
+        x = 1,
+        y = 7
+      } --[[table: 0x40df6a88]],
+      {
+        type = "ground_snow",
+        x = 1,
+        y = 9
+      } --[[table: 0x40df6b18]],
+      {
+        type = "ground_snow",
+        x = 1,
+        y = 8
+      } --[[table: 0x40df6ba8]],
+      {
+        type = "ground_snow",
+        x = 2,
+        y = 5
+      } --[[table: 0x40df6c38]],
+      {
+        type = "ground_snow",
+        x = 2,
+        y = 6
+      } --[[table: 0x40df6cc8]],
+      {
+        type = "ground_snow",
+        x = 2,
+        y = 7
+      } --[[table: 0x40df6d58]],
+      {
+        type = "ground_snow",
+        x = 2,
+        y = 9
+      } --[[table: 0x40df6de8]],
+      {
+        type = "ground_snow",
+        x = 2,
+        y = 8
+      } --[[table: 0x40df6e78]],
+      {
+        type = "ground_snow",
+        x = 3,
+        y = 6
+      } --[[table: 0x40df6f98]],
+      {
+        type = "ground_snow",
+        x = 3,
+        y = 7
+      } --[[table: 0x40df7028]],
+      {
+        type = "ground_snow",
+        x = 3,
+        y = 8
+      } --[[table: 0x40df70b8]],
+      {
+        type = "ground_snow",
+        x = 3,
+        y = 9
+      } --[[table: 0x40df7148]],
+      {
+        type = "ground_snow",
+        x = 4,
+        y = 7
+      } --[[table: 0x40df7268]],
+      {
+        type = "ground_snow",
+        x = 4,
+        y = 8
+      } --[[table: 0x40df72f8]],
+      {
+        type = "ground_snow",
+        x = 4,
+        y = 9
+      } --[[table: 0x40df7388]],
+      {
+        type = "ground_snow",
+        x = 5,
+        y = 0
+      } --[[table: 0x40df74a8]],
+      {
+        type = "ground_snow",
+        x = 6,
+        y = 0
+      } --[[table: 0x40df7538]],
+      {
+        type = "ground_snow",
+        x = 7,
+        y = 0
+      } --[[table: 0x40dfafd8]],
+      {
+        type = "ground_snow",
+        x = 8,
+        y = 0
+      } --[[table: 0x40dfb068]],
+      {
+        type = "ground_snow",
+        x = 8,
+        y = 1
+      } --[[table: 0x40dfb0f8]],
+      {
+        type = "ground_snow",
+        x = 7,
+        y = 1
+      } --[[table: 0x40dfb188]],
+      {
+        type = "ground_snow",
+        x = 6,
+        y = 1
+      } --[[table: 0x40dfb218]],
+      {
+        type = "ground_snow",
+        x = 5,
+        y = 1
+      } --[[table: 0x40dfb2a8]],
+      {
+        type = "ground_snow",
+        x = 7,
+        y = 2
+      } --[[table: 0x40dfb458]],
+      {
+        type = "ground_snow",
+        x = 8,
+        y = 2
+      } --[[table: 0x40dfb4e8]],
+      {
+        type = "ground_snow",
+        x = 8,
+        y = 3
+      } --[[table: 0x40dfb578]],
+      {
+        type = "ground_snow",
+        x = 7,
+        y = 3
+      } --[[table: 0x40dfb698]],
+      {
+        type = "ground_snow",
+        x = 7,
+        y = 4
+      } --[[table: 0x40dfb8d8]],
+      {
+        type = "ground_snow",
+        x = 9,
+        y = 4
+      } --[[table: 0x40dfb968]],
+      {
+        type = "ground_snow",
+        x = 8,
+        y = 4
+      } --[[table: 0x40dfb9f8]],
+      {
+        type = "ground_snow",
+        x = 8,
+        y = 5
+      } --[[table: 0x40dfba88]],
+      {
+        type = "ground_snow",
+        x = 5,
+        y = 5
+      } --[[table: 0x40dfbb18]],
+      {
+        type = "ground_snow",
+        x = 5,
+        y = 7
+      } --[[table: 0x40dfbba8]],
+      {
+        type = "ground_snow",
+        x = 5,
+        y = 9
+      } --[[table: 0x40dfbc38]],
+      {
+        type = "ground_snow",
+        x = 5,
+        y = 8
+      } --[[table: 0x40dfbcc8]],
+      {
+        type = "ground_snow",
+        x = 5,
+        y = 6
+      } --[[table: 0x40dfbd58]],
+      {
+        type = "ground_snow",
+        x = 6,
+        y = 5
+      } --[[table: 0x40dfbde8]],
+      {
+        type = "ground_snow",
+        x = 6,
+        y = 6
+      } --[[table: 0x40dfbe78]],
+      {
+        type = "ground_snow",
+        x = 6,
+        y = 8
+      } --[[table: 0x40dfbf08]],
+      {
+        type = "ground_snow",
+        x = 6,
+        y = 9
+      } --[[table: 0x40dfbf98]],
+      {
+        type = "ground_snow",
+        x = 6,
+        y = 7
+      } --[[table: 0x40dfc028]],
+      {
+        type = "ground_snow",
+        x = 7,
+        y = 5
+      } --[[table: 0x40dfc0b8]],
+      {
+        type = "ground_snow",
+        x = 7,
+        y = 6
+      } --[[table: 0x40dfc148]],
+      {
+        type = "ground_snow",
+        x = 7,
+        y = 7
+      } --[[table: 0x40e01890]],
+      {
+        type = "ground_snow",
+        x = 7,
+        y = 8
+      } --[[table: 0x40e01920]],
+      {
+        type = "ground_snow",
+        x = 7,
+        y = 9
+      } --[[table: 0x40e019b0]],
+      {
+        type = "ground_snow",
+        x = 8,
+        y = 6
+      } --[[table: 0x40e01a40]],
+      {
+        type = "ground_snow",
+        x = 8,
+        y = 7
+      } --[[table: 0x40e01ad0]],
+      {
+        type = "ground_snow",
+        x = 8,
+        y = 8
+      } --[[table: 0x40e01b60]],
+      {
+        type = "ground_snow",
+        x = 8,
+        y = 9
+      } --[[table: 0x40e01bf0]],
+      {
+        type = "ground_snow",
+        x = 9,
+        y = 5
+      } --[[table: 0x40e01c80]],
+      {
+        type = "ground_snow",
+        x = 9,
+        y = 6
+      } --[[table: 0x40e01d10]],
+      {
+        type = "ground_snow",
+        x = 9,
+        y = 8
+      } --[[table: 0x40e01da0]],
+      {
+        type = "ground_snow",
+        x = 9,
+        y = 7
+      } --[[table: 0x40e01e30]],
+      {
+        type = "ground_snow",
+        x = 9,
+        y = 9
+      } --[[table: 0x40e01ec0]],
+      {
+        type = "ground_snow",
+        x = 9,
+        y = 0
+      } --[[table: 0x40e01f50]],
+      {
+        type = "ground_snow",
+        x = 9,
+        y = 1
+      } --[[table: 0x40e01fe0]],
+      {
+        type = "ground_snow",
+        x = 9,
+        y = 2
+      } --[[table: 0x40e02070]],
+      {
+        type = "ground_snow",
+        x = 9,
+        y = 3
+      } --[[table: 0x40e02100]],
+      {
+        type = "ground_snow",
+        x = 10,
+        y = 0
+      } --[[table: 0x40e02190]],
+      {
+        type = "ground_snow",
+        x = 10,
+        y = 1
+      } --[[table: 0x40e02220]],
+      {
+        type = "ground_snow",
+        x = 10,
+        y = 2
+      } --[[table: 0x40e022b0]],
+      {
+        type = "ground_snow",
+        x = 10,
+        y = 4
+      } --[[table: 0x40e02340]],
+      {
+        type = "ground_snow",
+        x = 10,
+        y = 3
+      } --[[table: 0x40e023d0]],
+      {
+        type = "ground_snow",
+        x = 10,
+        y = 5
+      } --[[table: 0x40e02460]],
+      {
+        type = "ground_snow",
+        x = 10,
+        y = 6
+      } --[[table: 0x40e024f0]],
+      {
+        type = "ground_snow",
+        x = 10,
+        y = 7
+      } --[[table: 0x40e02580]],
+      {
+        type = "ground_snow",
+        x = 10,
+        y = 8
+      } --[[table: 0x40e02610]],
+      {
+        type = "ground_snow",
+        x = 10,
+        y = 9
+      } --[[table: 0x40e026a0]],
+      {
+        type = "ground_dirt",
+        x = 4,
+        y = 3
+      } --[[table: 0x40274398]],
+      {
+        type = "ground_dirt",
+        x = 5,
+        y = 3
+      } --[[table: 0x402583f8]],
+      {
+        type = "ground_dirt_snow-8",
+        x = 3,
+        y = 2
+      } --[[table: 0x4052f168]],
+      {
+        type = "ground_dirt_snow-16",
+        x = 3,
+        y = 4
+      } --[[table: 0x40def348]],
+      {
+        type = "ground_dirt_snow-17",
+        x = 3,
+        y = 3
+      } --[[table: 0x418356e8]],
+      {
+        type = "ground_dirt_snow-12",
+        x = 6,
+        y = 2
+      } --[[table: 0x40535d40]],
+      {
+        type = "ground_dirt_snow-13",
+        x = 6,
+        y = 4
+      } --[[table: 0x40267458]],
+      {
+        type = "ground_dirt_snow-14",
+        x = 4,
+        y = 2
+      } --[[table: 0x4052dd18]],
+      {
+        type = "ground_dirt_snow-14",
         x = 5,
         y = 2
-      } --[[table: 0x42002d80]]
-    } --[[table: 0x40a865f8]],
-    sX = 50,
-    sY = 50,
+      } --[[table: 0x40275eb8]],
+      {
+        type = "ground_dirt_snow-9",
+        x = 3,
+        y = 5
+      } --[[table: 0x40522728]],
+      {
+        type = "ground_dirt_snow-3",
+        x = 4,
+        y = 4
+      } --[[table: 0x409ca588]],
+      {
+        type = "ground_dirt_snow-13",
+        x = 4,
+        y = 5
+      } --[[table: 0x409ccf20]],
+      {
+        type = "ground_dirt_snow-7",
+        x = 5,
+        y = 4
+      } --[[table: 0x41871ae0]],
+      {
+        type = "ground_dirt_snow-4",
+        x = 6,
+        y = 3
+      } --[[table: 0x40260b40]],
+      {
+        type = "ground_snow",
+        x = 4,
+        y = 6
+      } --[[table: 0x409c6f10]]
+    } --[[table: 0x409c9c38]],
+    foreground = {} --[[table: 0x40e027c0]],
+    sX = 10,
+    sY = 10,
     x = 0,
     y = 0
-  } --[[table: 0x40a876e8]]
-} --[[table: 0x40a87118]]
+  } --[[table: 0x409c9b48]]
+} --[[table: 0x409d2108]]

@@ -41,7 +41,7 @@ function love.update(dt)
 		bck.objects[objName.text] = nil
 	end
 	local inputs = {}
-	for i,v in pairs(bck.objects[selectedObj]) do
+	for i,v in pairs(bck.objects[selectedObj]) do --TODO This bit is completely broken and needs to be rewritten
 		if type(v) == "boolean" then
 			table.insert(inputs, {checked = v, text = i})
 			suit.Checkbox(inputs[table.maxn(inputs)], suit.layout:row())

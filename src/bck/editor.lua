@@ -48,6 +48,18 @@ function love.update(dt)
 	end
 	suit.layout:reset(love.graphics.getWidth()-190, 100)
 	suit.Input(objSearchInput, suit.layout:row(180, 50))
+	if bck.objects[objSearchInput.text] ~= nil then --Exact match, put at top of results
+		local hit = false
+		if type(bck.objects[objSearchInput.text].image) == "userdata" then
+			if suit.ImageButton(bck.objects[objSearchInput.text].image, suit.layout:row()).hit then hit = true end
+		else
+			if suit.Button(objSearchInput.text, suit.layout:row()).hit then hit = true end
+		end
+		suit.Label(objSearchInput.text, {color = {normal={fg={0,0,0}}}}, suit.layout:row())
+		if hit then
+			editor.selected.objectType = objSearchInput.text
+		end
+	end
 	for i,v in pairs(bck.objects) do
 		if string.find(i, objSearchInput.text) ~= nil then
 			local hit = false
