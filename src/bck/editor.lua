@@ -145,8 +145,8 @@ function love.draw()
 		love.graphics.setColor(255, 0, 0, editor.colorBreathing.value)
 		local x = editor.viewport.x+(bck.world[editor.selected.area].x*config.gridSize.x)+200
 		local y = editor.viewport.y+(bck.world[editor.selected.area].y*config.gridSize.y)+25
-		local sX = bck.world[editor.selected.area].sX*config.gridSize.x
-		local sY = bck.world[editor.selected.area].sY*config.gridSize.y
+		local sX = (bck.world[editor.selected.area].sX+1)*config.gridSize.x
+		local sY = (bck.world[editor.selected.area].sY+1)*config.gridSize.y
 		love.graphics.rectangle("line", x, y, sX, sY)
 	end
 	if editor.selected.layer == "foreground" then
